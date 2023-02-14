@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class ExhausterMonitoringServiceImpl implements ExhausterMonitoringService {
 
     @Override
-    public String getInfo() {
-        return "TEST";
+    public InfoDto getInfo() {
+        return InfoDto.builder().data("TEST").build();
     }
 }

@@ -18,7 +18,7 @@ public class ExhausterMonitoringController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/info")
     @ResponseStatus(HttpStatus.OK)
-    public String getInfo() {
+    public InfoDto getInfo() {
         return exhausterMonitoringService.getInfo();
     }
 }

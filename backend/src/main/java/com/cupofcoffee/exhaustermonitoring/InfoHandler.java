@@ -45,6 +45,6 @@ public class InfoHandler extends TextWebSocketHandler {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }, 1000, 500, TimeUnit.MILLISECONDS);
+        }, 1000, 200, TimeUnit.MILLISECONDS);
     }
 }

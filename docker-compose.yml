@@ -1,0 +1,120 @@
+version: '3'
+
+services:
+  books-frontend:
+    build:
+      context: frontend
+      dockerfile: DockerfileFrontend
+    restart: always
+    container_name: books-frontend
+    ports:
+      - "8090:80"
+    tty: true
+    depends_on:
+      - books-backend
+  books-backend:
+    build:
+      context: backend
+      dockerfile: DockerfileServer
+    restart: always
+    environment:
+      - DB_HOST=books-db
+      - DB_PORT=5432
+      - DB_NAME=booksdb
+      - DB_USER=booksdb
+      - DB_PASSWORD=booksdb
+    container_name: books-backend
+    tty: true
+    depends_on:
+      - books-db
+  books-db:
+    image: postgres:10.3-alpine
+    container_name: books-db
+    ports:
+      - "25432:5432"
+    restart: always
+    environment:
+      - POSTGRES_DB=booksdb
+      - POSTGRES_USER=booksdb
+      - POSTGRES_PASSWORD=booksdb
+
+  mongodb:
+    image: docker.io/bitnami/mongodb:6.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - 'mongodb_data:/bitnami/mongodb'
+    environment:
+      MONGODB_ROOT_PASSWORD: mongo
+      MONGODB_USERNAME: mongo
+      MONGODB_PASSWORD: mongo
+      MONGODB_DATABASE: costings
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.0.1
+    container_name: zookeeper
+    ports:
+      - "22181:2181"
+    restart: always
+    volumes:
+      - 'zookeeper_log:/var/lib/zookeeper/log'
+      - 'zookeeper_data:/var/lib/zookeeper/data'
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:7.0.1
+    container_name: kafka
+    ports:
+      - "29092:29092"
+    restart: always
+    volumes:
+      - 'kafka_data:/var/lib/kafka/data'
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  # Kafka UI http://localhost:28080/
+  kafka_ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    depends_on:
+      - kafka
+    ports:
+      - "28080:8080"
+    restart: always
+    environment:
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+
+  grafana:
+    build: './backend/monitoring/config/grafana'
+    container_name: grafana
+    ports:
+      - "23000:3000"
+    volumes:
+      - ./backend/monitoring/grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+volumes:
+  db_data:
+  zookeeper_data:
+    driver: local
+  zookeeper_log:
+    driver: local
+  kafka_data:
+    driver: local
+  mongodb_data:
+    driver: local

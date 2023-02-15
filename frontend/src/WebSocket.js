@@ -1,19 +1,20 @@
 import React, {useEffect, useRef, useState} from "react";
 
 const WebSock = () => {
-  const socket = new WebSocket('ws://localhost:8080');
+  const socket = new WebSocket('ws://localhost:8080/info');
 
   socket.onopen = () => {
-    socket.send(JSON.stringify({
-      message: 'ПРИВЕТ ХАКАТОН-СЕРВЕР',
-      method: 'connection',
-      id: 21,
-      username: "denis",
-    }))
+    // socket.send(JSON.stringify({
+    //   message: 'ПРИВЕТ ХАКАТОН-СЕРВЕР(websocket)',
+    //   method: 'connection',
+    //   id: 21,
+    //   username: "denis",
+    // }))
+    getInfo();
   };
 
   socket.onmessage = (event) => {
-    console.log(`The Data is: ${event.data}`);
+    console.log(`The Data is: ${JSON.stringify(event.data)}`);
   }
 
   const btnAction = async () => {
@@ -23,6 +24,26 @@ const WebSock = () => {
       method: 'message',
       username: "denis",
     }));
+  }
+
+  const getInfo = () => {
+    return fetch('http://localhost:8080/api/v1/info', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(checkErrors);
+  }
+
+  const checkErrors = async (res) => {
+    if (res.ok) {
+      const body = await res.json()
+      console.log(`REST RESPONSE ${JSON.stringify(body)}`);
+      return {restResponse: res.json()};
+    }
+
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   // const [messages, setMessages] = useState([]);

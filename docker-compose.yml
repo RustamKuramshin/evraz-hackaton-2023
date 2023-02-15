@@ -1,17 +1,17 @@
 version: '3'
 
 services:
-  books-frontend:
+  exhauster-monitoring-ui:
     build:
       context: frontend
       dockerfile: DockerfileFrontend
     restart: always
-    container_name: books-frontend
+    container_name: exhauster-monitoring-ui
     ports:
-      - "8090:80"
+      - "33000:80"
     tty: true
-#    depends_on:
-#      - books-backend
+    depends_on:
+      - exhauster-monitoring-api
 
   exhauster-monitoring-api:
     build:
@@ -95,8 +95,8 @@ services:
     container_name: grafana
     ports:
       - "33000:3000"
-    volumes:
-      - ./backend/monitoring/grafana:/var/lib/grafana
+#    volumes:
+#      - ./backend/monitoring/grafana:/var/lib/grafana
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin

@@ -22,3 +22,18 @@
 ### Архитектура решения
 
 ![img](schema.jpg)
+
+### Описание REST API
+
+После запуска бэкэнд-сервиса локально или в контейнере спецификация OpenAPI доступна по ссылке: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+Так же есть http-файл для тестирования ```api-test.http```
+
+
+### Описание WebSocket API
+После запуска бэкэнд-сервиса локально или в контейнере доступен канал вебсокета для метрик эксгаустеров
+
+```http request
+WEBSOCKET ws://localhost:8080/info
+Content-Type: application-json
+```

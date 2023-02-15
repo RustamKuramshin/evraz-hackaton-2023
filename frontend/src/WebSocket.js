@@ -5,11 +5,12 @@ const WebSock = () => {
 
   socket.onopen = () => {
     socket.send(JSON.stringify({
-      message: 'ПРИВЕТ ХАКАТОН-СЕРВЕР',
+      message: 'ПРИВЕТ ХАКАТОН-СЕРВЕР(websocket)',
       method: 'connection',
       id: 21,
       username: "denis",
     }))
+    getInfo();
   };
 
   socket.onmessage = (event) => {
@@ -37,7 +38,7 @@ const WebSock = () => {
 
   const checkErrors = (res) => {
     if (res.ok) {
-      return res.json();
+      return {restResponse: res.json()};
     }
 
     return Promise.reject(`Ошибка: ${res.status}`);

@@ -1,0 +1,11 @@
+FROM gradle:jdk11 as builder
+COPY --chown=gradle:gradle . /home/gradle/
+WORKDIR /home/gradle
+RUN gradle clean
+RUN gradle assemble -i
+RUN cp ./build/libs/exhauster-monitoring-1.0.0.jar ./exhauster-monitoring-1.0.0.jar
+
+FROM openjdk:11-jdk
+WORKDIR /app
+COPY --from=builder /home/gradle/exhauster-monitoring-1.0.0.jar ./exhauster-monitoring-1.0.0.jar
+ENTRYPOINT ["java","-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n","-jar","exhauster-monitoring-1.0.0.jar"]

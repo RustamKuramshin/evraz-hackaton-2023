@@ -10,39 +10,32 @@ services:
     ports:
       - "8090:80"
     tty: true
-    depends_on:
-      - books-backend
-  books-backend:
+#    depends_on:
+#      - books-backend
+
+  exhauster-monitoring-api:
     build:
       context: backend
       dockerfile: DockerfileServer
     restart: always
+    container_name: exhauster-monitoring-api
+    ports:
+      - "38080:8080"
     environment:
-      - DB_HOST=books-db
-      - DB_PORT=5432
-      - DB_NAME=booksdb
-      - DB_USER=booksdb
-      - DB_PASSWORD=booksdb
-    container_name: books-backend
+      - MONGODB_HOST=metrics-db
+      - MONGODB_PORT=27017
+      - MONGODB_DBNAME=metrics
+      - MONGODB_USER=mongo
+      - MONGODB_PASS=mongo
     tty: true
     depends_on:
-      - books-db
-  books-db:
-    image: postgres:10.3-alpine
-    container_name: books-db
-    ports:
-      - "25432:5432"
-    restart: always
-    environment:
-      - POSTGRES_DB=booksdb
-      - POSTGRES_USER=booksdb
-      - POSTGRES_PASSWORD=booksdb
+      - metrics-db
 
-  mongodb:
+  metrics-db:
     image: docker.io/bitnami/mongodb:6.0
-    container_name: mongodb
+    container_name: metrics-db
     ports:
-      - "27017:27017"
+      - "37017:27017"
     restart: always
     volumes:
       - 'mongodb_data:/bitnami/mongodb'
@@ -50,7 +43,7 @@ services:
       MONGODB_ROOT_PASSWORD: mongo
       MONGODB_USERNAME: mongo
       MONGODB_PASSWORD: mongo
-      MONGODB_DATABASE: costings
+      MONGODB_DATABASE: metrics
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.1

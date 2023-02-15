@@ -25,6 +25,24 @@ const WebSock = () => {
     }));
   }
 
+  const getInfo = () => {
+    return fetch('http://localhost:8080/api/v1/info', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(checkErrors);
+  }
+
+  const checkErrors = (res) => {
+    if (res.ok) {
+      return res.json();
+    }
+
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
   // const [messages, setMessages] = useState([]);
   // const [value, setValue] = useState('');
   // const socket = useRef()

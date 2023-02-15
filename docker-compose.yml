@@ -10,8 +10,8 @@ services:
     ports:
       - "33000:80"
     tty: true
-#    depends_on:
-#      - books-backend
+    depends_on:
+      - exhauster-monitoring-api
 
   exhauster-monitoring-api:
     build:

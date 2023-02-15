@@ -4,12 +4,12 @@ const WebSock = () => {
   const socket = new WebSocket('ws://localhost:8080/info');
 
   socket.onopen = () => {
-    socket.send(JSON.stringify({
-      message: 'ПРИВЕТ ХАКАТОН-СЕРВЕР(websocket)',
-      method: 'connection',
-      id: 21,
-      username: "denis",
-    }))
+    // socket.send(JSON.stringify({
+    //   message: 'ПРИВЕТ ХАКАТОН-СЕРВЕР(websocket)',
+    //   method: 'connection',
+    //   id: 21,
+    //   username: "denis",
+    // }))
     getInfo();
   };
 
@@ -36,9 +36,10 @@ const WebSock = () => {
     .then(checkErrors);
   }
 
-  const checkErrors = (res) => {
+  const checkErrors = async (res) => {
     if (res.ok) {
-      console.log({getRequest: res.json()});
+      const body = await res.json()
+      console.log(`REST RESPONSE ${JSON.stringify(body)}`);
       return {restResponse: res.json()};
     }
 

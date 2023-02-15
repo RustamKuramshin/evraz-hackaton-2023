@@ -4,3 +4,93 @@ GET localhost:8080/api/v1/info
 ###
 WEBSOCKET ws://localhost:8080/info
 Content-Type: application-json
+
+# API интерфейсы для UI со списком агломашин и дымоходов
+
+###
+GET localhost:8080/api/v1/machines/exhausters
+Accept: application/json
+
+#[
+#  {
+#    "machineId": "87712155-0bff-468d-9b0e-ecdaf7a68a53",
+#    "machineData": "maker",
+#    "machineNumberData": 0.15701650211883234,
+#    "exhausters": [
+#      {
+#        "exhausterId": "563a4a4f-98d2-4727-bf1b-3c7ad367071e",
+#        "exhausterData": "scholar"
+#      },
+#      {
+#        "exhausterId": "563a4a4f-98d2-4727-bf1b-3c7ad367071e",
+#        "exhausterData": "scholar"
+#      }
+#    ]
+#  },
+#  {
+#    "machineId": "87712155-0bff-468d-9b0e-ecdaf7a68a53",
+#    "machineData": "maker",
+#    "machineNumberData": 0.15701650211883234,
+#    "exhausters": [
+#      {
+#        "exhausterId": "563a4a4f-98d2-4727-bf1b-3c7ad367071e",
+#        "exhausterData": "scholar"
+#      },
+#      {
+#        "exhausterId": "563a4a4f-98d2-4727-bf1b-3c7ad367071e",
+#        "exhausterData": "scholar"
+#      }
+#    ]
+#  }
+#]
+
+###
+WEBSOCKET ws://localhost:8080/machines/exhausters/metrics
+Content-Type: application-json
+
+#{
+#  "machineId": "87712155-0bff-468d-9b0e-ecdaf7a68a53",
+#  "exhausterId": "563a4a4f-98d2-4727-bf1b-3c7ad367071e",
+#  "metrics": [
+#    {
+#      "metricId": "b68f23a4-94de-42cc-a85d-9043672d0888",
+#      "metricName": "mysterious",
+#      "metricData": 0.15397206065446767
+#    },
+#    {
+#      "metricId": "b68f23a4-94de-42cc-a85d-9043672d0888",
+#      "metricName": "mysterious",
+#      "metricData": 0.15397206065446767
+#    },
+#    {
+#      "metricId": "b68f23a4-94de-42cc-a85d-9043672d0888",
+#      "metricName": "mysterious",
+#      "metricData": 0.15397206065446767
+#    }
+#  ]
+#}
+
+# API интерфейсы для UI конкретным дымоходом
+
+###
+GET localhost:8080/api/v1/exhausters/${exhausterId}
+Accept: application/json
+
+#{
+#  "machineId": "87712155-0bff-468d-9b0e-ecdaf7a68a53",
+#  "machineData": "maker",
+#  "exhauster": {
+#    "exhausterId": "563a4a4f-98d2-4727-bf1b-3c7ad367071e",
+#    "exhausterData": "scholar"
+#  }
+#}
+
+###
+WEBSOCKET ws://localhost:8080/exhausters/${exhausterId}/metrics
+Content-Type: application-json
+
+#{
+#  "metricId": "b68f23a4-94de-42cc-a85d-9043672d0888",
+#  "metricName": "mysterious",
+#  "metricData": 0.15397206065446767
+#}

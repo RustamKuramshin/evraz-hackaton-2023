@@ -38,6 +38,7 @@ const WebSock = () => {
 
   const checkErrors = (res) => {
     if (res.ok) {
+      console.log({getRequest: res.json()});
       return {restResponse: res.json()};
     }
 

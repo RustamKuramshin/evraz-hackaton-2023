@@ -1,5 +1,12 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="exhauster-monitoring" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <envs>
+      <env name="MONGODB_HOST" value="localhost" />
+      <env name="MONGODB_PORT" value="37017" />
+      <env name="MONGODB_DBNAME" value="metrics" />
+      <env name="MONGODB_USER" value="mongo" />
+      <env name="MONGODB_PASS" value="mongo" />
+    </envs>
     <module name="exhauster-monitoring.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.cupofcoffee.exhaustermonitoring.ExhausterMonitoringApplication" />
     <extension name="coverage">

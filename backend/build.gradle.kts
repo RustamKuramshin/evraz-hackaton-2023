@@ -32,6 +32,8 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
     implementation("com.fasterxml.jackson.module:jackson-module-paranamer")
 
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
+
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     annotationProcessor("org.projectlombok:lombok")

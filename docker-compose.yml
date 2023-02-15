@@ -49,7 +49,7 @@ services:
     image: confluentinc/cp-zookeeper:7.0.1
     container_name: zookeeper
     ports:
-      - "22181:2181"
+      - "32181:2181"
     restart: always
     volumes:
       - 'zookeeper_log:/var/lib/zookeeper/log'
@@ -62,7 +62,7 @@ services:
     image: confluentinc/cp-kafka:7.0.1
     container_name: kafka
     ports:
-      - "29092:29092"
+      - "39092:29092"
     restart: always
     volumes:
       - 'kafka_data:/var/lib/kafka/data'
@@ -83,7 +83,7 @@ services:
     depends_on:
       - kafka
     ports:
-      - "28080:8080"
+      - "39090:8080"
     restart: always
     environment:
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
@@ -94,7 +94,7 @@ services:
     build: './backend/monitoring/config/grafana'
     container_name: grafana
     ports:
-      - "23000:3000"
+      - "33000:3000"
     volumes:
       - ./backend/monitoring/grafana:/var/lib/grafana
     environment:
@@ -102,7 +102,6 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
 
 volumes:
-  db_data:
   zookeeper_data:
     driver: local
   zookeeper_log:

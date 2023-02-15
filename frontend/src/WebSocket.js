@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 
 const WebSock = () => {
-  const socket = new WebSocket('ws://localhost:8080');
+  const socket = new WebSocket('ws://localhost:8080/info');
 
   socket.onopen = () => {
     socket.send(JSON.stringify({
@@ -13,7 +13,7 @@ const WebSock = () => {
   };
 
   socket.onmessage = (event) => {
-    console.log(`The Data is: ${event.data}`);
+    console.log(`The Data is: ${JSON.stringify(event.data)}`);
   }
 
   const btnAction = async () => {

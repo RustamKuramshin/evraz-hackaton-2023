@@ -17,7 +17,7 @@ const WebSock = () => {
     console.log(`The Data is: ${JSON.stringify(event.data)}`);
   }
 
-  const btnAction = async () => {
+  const btnAction = () => {
     socket.send(JSON.stringify({
       message: "ХАКАТОН Отправка Data",
       id: 21,
@@ -40,7 +40,7 @@ const WebSock = () => {
     if (res.ok) {
       const body = await res.json()
       console.log(`REST RESPONSE ${JSON.stringify(body)}`);
-      return {restResponse: res.json()};
+      return JSON.stringify(body);
     }
 
     return Promise.reject(`Ошибка: ${res.status}`);

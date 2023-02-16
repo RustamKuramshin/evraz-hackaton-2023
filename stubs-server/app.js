@@ -1,48 +1,61 @@
 /* eslint-disable */
-//const ws = require('ws');
+const WebSocket = require('ws');
 const express = require('express');
-const { connection } = require('mongoose');
 const app = express();
-const WSServer = require('express-ws')(app)
-const aWss = WSServer.getWss();
-const router = require('express').Router();
 
-const sendingData = { message: 'Data for GET request' };
+const wss = new WebSocket.Server({ port: 8080 });
 
-app.ws('/', (ws, req) => {
-  console.log('SUCCESSFULY CONNECTED');
-  ws.send('Ты подключён');
-  ws.on('message', (msg) => {
-    msg = JSON.parse(msg);
-    switch (msg.method) {
-      case 'connection':
-        connectionHandler(ws, msg);
-        break;
-    }
-  })
-})
+wss.on('connection', (ws) => {
+  console.log('New client connected!');
 
-app.listen(8080, () => console.log('Server started on PORT 8080'));
-
-const getInfo = (req, res) => {
-  const msg = { text: 'aboba' };
-  res.status(200).send(msg);
-};
-
-router.get('/api/v1/info', getInfo);
-app.use(router);
-const connectionHandler = (ws, msg) => {
-  ws.id = msg.id; //id для каждой сессии
-  broadcastConnection(ws, msg);
-}
-
-const broadcastConnection = (ws, msg) => {
-  aWss.clients.forEach(client => {
-    if(client.id === msg.id) {
-      client.send(`Пользователь ${msg.username}`);
-    }
+  ws.on('message', (data) => {
+    console.log(`Client send ${data}`);
   });
-}
+
+  ws.on('close', () => {
+    console.log('Client has disconnected!');
+  });
+});
+
+// const WSServer = require('express-ws')(app)
+// const aWss = WSServer.getWss();
+// const router = require('express').Router();
+//const { connection } = require('mongoose');
+
+// app.ws('/', (ws, req) => {
+//   console.log('SUCCESSFULY CONNECTED');
+//   ws.send('Ты подключён');
+//   ws.on('message', (msg) => {
+//     msg = JSON.parse(msg);
+//     switch (msg.method) {
+//       case 'connection':
+//         connectionHandler(ws, msg);
+//         break;
+//     }
+//   })
+// })
+
+// app.listen(8080, () => console.log('Server started on PORT 8080'));
+
+// const getInfo = (req, res) => {
+//   const msg = { text: 'aboba' };
+//   res.status(200).send(msg);
+// };
+
+// router.get('/api/v1/info', getInfo);
+// app.use(router);
+// const connectionHandler = (ws, msg) => {
+//   ws.id = msg.id; //id для каждой сессии
+//   broadcastConnection(ws, msg);
+// }
+
+// const broadcastConnection = (ws, msg) => {
+//   aWss.clients.forEach(client => {
+//     if(client.id === msg.id) {
+//       client.send(`Пользователь ${msg.username}`);
+//     }
+//   });
+// }
 // const wss = new ws.Server({
 //   port: 8080,
 // }, () => console.log('Server started on PORT 8080'));
@@ -66,3 +79,4 @@ const broadcastConnection = (ws, msg) => {
 //     client.send(JSON.stringify(message));
 //   })
 // }
+

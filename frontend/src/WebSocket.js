@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 
 const WebSock = () => {
-  const socket = new WebSocket('ws://localhost:8080/info');
+  const socket = new WebSocket('ws://51.250.23.216:38080/info');
 
   socket.onopen = () => {
     // socket.send(JSON.stringify({
@@ -27,7 +27,7 @@ const WebSock = () => {
   }
 
   const getInfo = () => {
-    return fetch('http://localhost:8080/api/v1/info', {
+    return fetch('http://51.250.23.216:38080/api/v1/info', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const WebSock = () => {
   // const [data, setData] = useState('')
 
   // function connect() {
-  //     socket.current = new WebSocket('ws://localhost:8080/')
+  //     socket.current = new WebSocket('ws://51.250.23.216:38080/')
 
   //     socket.current.onopen = () => {
   //         setConnected(true);

@@ -10,13 +10,9 @@ services:
     ports:
       - "33000:80"
     tty: true
-    depends_on:
-      - exhauster-monitoring-api
 
   exhauster-monitoring-api:
-    build:
-      context: backend
-      dockerfile: DockerfileServer
+    image: docker.io/library/exhauster-monitoring:1.0.0
     restart: always
     container_name: exhauster-monitoring-api
     ports:
@@ -28,8 +24,6 @@ services:
       - MONGODB_USER=mongo
       - MONGODB_PASS=mongo
     tty: true
-    depends_on:
-      - metrics-db
 
   metrics-db:
     image: docker.io/bitnami/mongodb:6.0

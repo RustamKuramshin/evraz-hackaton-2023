@@ -8,4 +8,4 @@ cd backend
 
 ./gradlew bootBuildImage
 
-docker compose up -d exhauster-monitoring-api
+docker compose up -d metrics-db exhauster-monitoring-api

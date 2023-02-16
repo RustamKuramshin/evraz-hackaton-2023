@@ -5,12 +5,6 @@ const WebSock = () => {
 
 
   socket.onopen = () => {
-    // socket.send(JSON.stringify({
-    //   message: 'ПРИВЕТ ХАКАТОН-СЕРВЕР(websocket)',
-    //   method: 'connection',
-    //   id: 21,
-    //   username: "denis",
-    // }))
     getInfo();
   };
 
@@ -18,17 +12,11 @@ const WebSock = () => {
     console.log(`The Data is: ${JSON.stringify(event.data)}`);
   }
 
-  const btnAction = async () => {
-    socket.send(JSON.stringify({
-      message: "ХАКАТОН Отправка Data",
-      id: 21,
-      method: 'message',
-      username: "denis",
-    }));
+  const btnAction = () => {
+
   }
 
   const getInfo = () => {
-
     return fetch('http://51.250.23.216:38080/api/v1/info', {
       method: 'GET',
       headers: {
@@ -41,7 +29,6 @@ const WebSock = () => {
   const checkErrors = async (res) => {
     if (res.ok) {
       const body = await res.json()
-      console.log(`REST RESPONSE ${JSON.stringify(body)}`);
       return JSON.stringify(body);
     }
 

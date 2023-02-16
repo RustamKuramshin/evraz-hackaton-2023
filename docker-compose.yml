@@ -14,9 +14,7 @@ services:
       - exhauster-monitoring-api
 
   exhauster-monitoring-api:
-    build:
-      context: backend
-      dockerfile: DockerfileServer
+    image: docker.io/library/exhauster-monitoring:1.0.0
     restart: always
     container_name: exhauster-monitoring-api
     ports:

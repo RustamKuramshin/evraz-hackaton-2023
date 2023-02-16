@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import WebSock from "./WebSocket";
+import WebSock from "../WebSocket";
 
 function App() {
   return (

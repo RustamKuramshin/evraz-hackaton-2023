@@ -2,6 +2,9 @@
 GET localhost:38080/api/v1/info
 
 ###
+GET 51.250.23.216:38080/api/v1/info
+
+###
 WEBSOCKET ws://localhost:8080/info
 Content-Type: application-json
 

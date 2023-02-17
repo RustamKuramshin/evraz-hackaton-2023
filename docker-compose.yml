@@ -26,18 +26,34 @@ services:
     tty: true
 
   metrics-db:
-    image: docker.io/bitnami/mongodb:6.0
+#    container_name: mongodb4.4
+    hostname: metrics-db
+    image: mongo:6.0
+    volumes:
+      - ./data/db:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongokeyfile:/docker-entrypoint-initdb.d/mongokeyfile
+      - ./mongod-config-file:/docker-entrypoint-initdb.d/mongod-config-file
+#    ports:
+#      - 35000:27017
+#    env_file:
+#      - .env
+#    image: docker.io/bitnami/mongodb:6.0
     container_name: metrics-db
+    command: --replSet mstream --config /docker-entrypoint-initdb.d/mongod-config-file
     ports:
       - "37017:27017"
     restart: always
-    volumes:
-      - 'mongodb_data:/bitnami/mongodb'
+#    volumes:
+#      - 'mongodb_data:/bitnami/mongodb'
     environment:
-      MONGODB_ROOT_PASSWORD: mongo
-      MONGODB_USERNAME: mongo
-      MONGODB_PASSWORD: mongo
-      MONGODB_DATABASE: metrics
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+      MONGO_INITDB_DATABASE: metrics
+#      MONGODB_ROOT_PASSWORD: mongo
+#      MONGODB_USERNAME: mongo
+#      MONGODB_PASSWORD: mongo
+#      MONGODB_DATABASE: metrics
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.1

@@ -1,5 +1,7 @@
 package com.cupofcoffee.exhaustermonitoring;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,11 +11,12 @@ import javax.annotation.PostConstruct;
 import java.util.function.Consumer;
 
 @EnableKafka
+@Slf4j
+@RequiredArgsConstructor
 @SpringBootApplication
 public class ExhausterMonitoringApplication {
 
-    @Autowired
-    private ExhausterDao exhausterDao;
+    private final ExhausterDao exhausterDao;
 
     public static void main(String[] args) {
         SpringApplication.run(ExhausterMonitoringApplication.class, args);
@@ -21,6 +24,7 @@ public class ExhausterMonitoringApplication {
 
     @PostConstruct
     public void onStartup() {
+        log.info("MONGODB: Start read change stream");
         exhausterDao.getAllExhausterMetricsForAllMachines((Consumer<Object>) System.out::println);
     }
 }

@@ -7,7 +7,7 @@ class Api {
   getInfo() {
     return fetch(`${this._link}/api/v1/info`, {
       method: 'GET',
-      headers: this._getHeaders()
+      headers: this._headers,
     })
       .then(this.checkErrors);
   }
@@ -25,4 +25,4 @@ export default new Api({
   headers: {
     'Content-Type': 'application/json',
   }
-})
+});

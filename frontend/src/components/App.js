@@ -1,27 +1,30 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Api from '../utils/Api';
 
 function App() {
   const [data, setData] = useState({});
-  const socket = new WebSocket('ws://51.250.23.216:38080/info');
+  //const socket = useRef(new WebSocket('ws://localhost:8080/'));
+  const socket = useRef(new WebSocket('ws://51.250.23.216:38080/info'));
 
   useEffect(() => {
-    socket.onopen = () => {
+    socket.current.onopen = () => {
       console.log('Opened Connection!');
       Api.getInfo();
     };
 
-    socket.onmessage = (event) => {
-      setData(JSON.stringify(event.data));
+    socket.current.onmessage = (event) => {
+      setData(JSON.parse(event.data));
     }
 
-    return () => socket.close();
-  })
+    return () => socket.current.onclose = () => {
+      console.log('Closed Connection!');
+    };
+  }, [])
 
   return (
     <div>
-      {data}
+      {JSON.stringify(data)}
     </div>
   );
 }

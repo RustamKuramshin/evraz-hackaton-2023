@@ -27,38 +27,42 @@ public class ExhausterMonitoringController {
     @RequestMapping(method = RequestMethod.GET, value = "/info")
     @ResponseStatus(HttpStatus.OK)
     public InfoDto getInfo() {
+
         return exhausterMonitoringService.getInfo();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/metrics")
     @ResponseStatus(HttpStatus.OK)
     public List<Map<String, String>> getMetricsJsonBetweenStartDateAndEndDate(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
 
-        return null;
+        return exhausterMonitoringService.getMetricsJsonBetweenStartDateAndEndDate(start, end);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/metrics/values")
     @ResponseStatus(HttpStatus.OK)
     public List<String> getAllMetricsByMetricNameBetweenStartDateAndEndDate(
-            @RequestParam String metricName,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
-        return null;
+        @RequestParam String metricName,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
+
+        return exhausterMonitoringService.getAllMetricsByMetricNameBetweenStartDateAndEndDate(metricName, start, end);
     }
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/metrics/json/last")
     @ResponseStatus(HttpStatus.OK)
     public Map<String, String> getLastMetricsJson() {
-        return null;
+
+        return exhausterMonitoringService.getLastMetricsJson();
     }
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/metrics/value/last")
     @ResponseStatus(HttpStatus.OK)
     public String getLastMetricByMetricName(@RequestParam String metricName) {
-        return null;
+
+        return exhausterMonitoringService.getLastMetricByMetricName(metricName);
     }
 }

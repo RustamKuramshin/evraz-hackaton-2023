@@ -2,7 +2,7 @@ package com.cupofcoffee.exhaustermonitoring;
 
 import java.util.Map;
 
-public interface TimeSeriesDao {
+public interface MetricsTimeSeriesDao {
 
     void saveToInfluxDb(Map<String, String> metrics);
 }

@@ -1,68 +1,50 @@
 /* eslint-disable */
-//const ws = require('ws');
-const express = require('express');
-const { connection } = require('mongoose');
-const app = express();
-const WSServer = require('express-ws')(app)
-const aWss = WSServer.getWss();
-const router = require('express').Router();
+const WebSocket = require('ws');
+const fs = require('fs');
 
-const sendingData = { message: 'Data for GET request' };
-
-app.ws('/', (ws, req) => {
-  console.log('SUCCESSFULY CONNECTED');
-  ws.send('Ты подключён');
-  ws.on('message', (msg) => {
-    msg = JSON.parse(msg);
-    switch (msg.method) {
-      case 'connection':
-        connectionHandler(ws, msg);
-        break;
-    }
-  })
-})
-
-app.listen(8080, () => console.log('Server started on PORT 8080'));
-
-const getInfo = (req, res) => {
-  const msg = { text: 'aboba' };
-  res.status(200).send(msg);
-};
-
-router.get('/api/v1/info', getInfo);
-app.use(router);
-const connectionHandler = (ws, msg) => {
-  ws.id = msg.id; //id для каждой сессии
-  broadcastConnection(ws, msg);
-}
-
-const broadcastConnection = (ws, msg) => {
-  aWss.clients.forEach(client => {
-    if(client.id === msg.id) {
-      client.send(`Пользователь ${msg.username}`);
-    }
+const wss = new WebSocket.Server({ port: 8080 });
+let jsonData;
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
   });
 }
-// const wss = new ws.Server({
-//   port: 8080,
-// }, () => console.log('Server started on PORT 8080'));
 
-// wss.on('connection', function connection(ws) {
-//   ws.on('message', function(msg) {
-//     msg = JSON.parse(msg);
-//     switch (msg.event) {
-//       case 'message':
-//         broadcastMessage(msg);
-//         break;
-//       case 'connection':
-//         broadcastMessage(msg);
-//         break;
-//     }
-//   })
-// });
 
-// function broadcastMessage(message) {
-//   wss.clients.forEach(client => {
-//     client.send(JSON.stringify(message));
-//   })
-// }
+const sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+wss.on('connection', async (ws) => {
+  console.log('Client connected');
+
+  fs.readFile('scratch_7.json', function (err, data) {
+    if (err) console.log(err);
+    else {
+      jsonData = JSON.parse(data);
+    }
+  })
+
+  // setInterval(() => {
+  //   ws.send(JSON.stringify(jsonData));
+  //   setTimeout(() => {
+  //     jsonData = { info: uuidv4() };
+  //   }, 200)
+  // }, 2000);
+
+  setInterval(() => {
+    ws.send(JSON.stringify(jsonData));
+    setTimeout(() => {
+      jsonData = { info: uuidv4() };
+    }, 200)
+  }, 2000);
+
+  ws.on('message', async (data) => {
+    console.log(`client send: ${data}`);
+  })
+
+  ws.on('close', () => {
+    console.log('Client disconnected');
+  })
+});

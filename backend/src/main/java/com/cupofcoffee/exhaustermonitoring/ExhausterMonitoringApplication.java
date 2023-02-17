@@ -24,7 +24,7 @@ public class ExhausterMonitoringApplication {
 
     @PostConstruct
     public void onStartup() {
-        log.info("MONGODB: Start read change stream");
-        exhausterDao.getAllExhausterMetricsForAllMachines((Consumer<Object>) System.out::println);
+//        log.info("MONGODB: Start read change stream");
+//        exhausterDao.getAllExhausterMetricsForAllMachines((Consumer<Object>) System.out::println);
     }
 }

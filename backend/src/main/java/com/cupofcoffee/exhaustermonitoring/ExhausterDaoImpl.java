@@ -22,58 +22,27 @@ import java.util.function.Consumer;
 @Component
 public class ExhausterDaoImpl implements ExhausterDao {
 
-    //  @Override
-    public List<Object> getAllExhausterMetricsForAllMachines(Consumer<Object> c) {
-        return null;
-    }
-
-    //  @Override
-    public Object getExhausterMetricsByExhausterId(Consumer<Object> c, String exhausterId) {
-        return null;
-    }
-
-    //  @Override
-    public List<Object> getExhausterInfoForAllMachines() {
-        return null;
-    }
-
-    //  @Override
-    public Object getExhausterInfoByExhausterId(String exhausterId) {
-        return null;
-    }
-
-    @Override
-    public List<Map<String, String>> getMetricsJsonBetweenStartDateAndEndDate(LocalDateTime start, LocalDateTime end) {
-        return null;
-    }
     private static final String METRICS_COLLECTION_NAME = "metrics-0";
 
     private static final String EXHAUSTER_ID_FIELD_NAME = "exhausterId";
 
     private final MongoTemplate mongoTemplate;
 
+    // НОВЫЕ МЕТОДЫ ДЛЯ РЕАЛИЗАЦИИ
+
     @Override
-    public void getAllExhausterMetricsForAllMachines(Consumer<Object> c) {
-        mongoTemplate.getCollection(METRICS_COLLECTION_NAME).watch().forEach(c);
+    public List<Map<String, String>> getMetricsJsonBetweenStartDateAndEndDate(LocalDateTime start, LocalDateTime end) {
+        return null;
     }
 
     @Override
     public List<String> getAllMetricsByMetricNameBetweenStartDateAndEndDate(String metricName, LocalDateTime start, LocalDateTime end) {
         return null;
     }
-    @Override
-    public void getExhausterMetricsByExhausterId(Consumer<Object> c, String exhausterId) {
-        Bson filter = Filters.eq(EXHAUSTER_ID_FIELD_NAME, exhausterId);
-        mongoTemplate.getCollection(METRICS_COLLECTION_NAME).watch(List.of(filter)).forEach(c);
-    }
 
     @Override
     public Map<String, String> getLastMetricsJson() {
         return null;
-    }
-    @Override
-    public List<Map> getExhausterInfoForAllMachines() {
-        return mongoTemplate.findAll(Map.class, METRICS_COLLECTION_NAME);
     }
 
     @Override
@@ -85,13 +54,28 @@ public class ExhausterDaoImpl implements ExhausterDao {
     public void readChangeStream(Consumer<Object> consumer) {
 
     }
-    @Override
+
+    // РЕАЛИЗАЦИЯ СТРАХ МЕТОДОВ (БРАТЬ ДЛЯ ПРИМЕРА)
+
+    public void getExhausterMetricsByExhausterId(Consumer<Object> c, String exhausterId) {
+        Bson filter = Filters.eq(EXHAUSTER_ID_FIELD_NAME, exhausterId);
+        mongoTemplate.getCollection(METRICS_COLLECTION_NAME).watch(List.of(filter)).forEach(c);
+    }
+
+    public List<Map> getExhausterInfoForAllMachines() {
+        return mongoTemplate.findAll(Map.class, METRICS_COLLECTION_NAME);
+    }
+
+    public void getAllExhausterMetricsForAllMachines(Consumer<Object> c) {
+        mongoTemplate.getCollection(METRICS_COLLECTION_NAME).watch().forEach(c);
+    }
+
     public Map getExhausterInfoByExhausterId(String exhausterId) {
         Query query = new Query();
         query.addCriteria(Criteria.where(EXHAUSTER_ID_FIELD_NAME).is(exhausterId));
         return mongoTemplate.find(query, Map.class, METRICS_COLLECTION_NAME)
-          .stream()
-          .findFirst()
-          .orElse(Map.of());
+                .stream()
+                .findFirst()
+                .orElse(Map.of());
     }
 }

@@ -4,8 +4,10 @@ import Api from '../utils/Api';
 
 function App() {
   const [data, setData] = useState({});
-  //const socket = useRef(new WebSocket('ws://localhost:8080/'));
-  const socket = useRef(new WebSocket('ws://51.250.23.216:38080/info'));
+  const socket = useRef(new WebSocket('ws://localhost:8080/'));
+  //const socket = useRef(new WebSocket('ws://51.250.23.216:38080/info'));
+
+  //console.log([input, data]);
 
   useEffect(() => {
     socket.current.onopen = () => {
@@ -14,19 +16,28 @@ function App() {
     };
 
     socket.current.onmessage = (event) => {
-      setData(JSON.parse(event.data));
+      let temp = JSON.parse(event.data);
+      setData(temp);
+      console.log(data["SM_Exgauster\\[8:1]"]);
+
+      // setInput(temp["SM_Exgauster\\[8:1]"]);
+      // console.log(input);
     }
 
+    socket.current.send("READY");
     return () => socket.current.onclose = () => {
       console.log('Closed Connection!');
     };
-  }, [])
+  }, [data]);
+  // }, [input, data]);
 
   return (
-    <div>
-      {JSON.stringify(data)}
+    <div
+      style={{alignSelf: "center", justifySelf: "center"}}
+    >
+      {data["SM_Exgauster\\[8:1]"]}
     </div>
-  );
+);
 }
 
 export default App;

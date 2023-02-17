@@ -31,14 +31,14 @@ public class ExhausterDaoImpl implements ExhausterDao {
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public List<Object> getAllExhausterMetricsForAllMachines(Consumer<Object> c) {
-        return processChangeStream(mongoTemplate.getCollection(METRICS_COLLECTION_NAME).watch(), c);
+    public void getAllExhausterMetricsForAllMachines(Consumer<Object> c) {
+        mongoTemplate.getCollection(METRICS_COLLECTION_NAME).watch().forEach(c);
     }
 
     @Override
-    public Object getExhausterMetricsByExhausterId(Consumer<Object> c, String exhausterId) {
+    public void getExhausterMetricsByExhausterId(Consumer<Object> c, String exhausterId) {
         Bson filter = Filters.eq(EXHAUSTER_ID_FIELD_NAME, exhausterId);
-        return processChangeStream(mongoTemplate.getCollection(METRICS_COLLECTION_NAME).watch(List.of(filter)), c);
+        mongoTemplate.getCollection(METRICS_COLLECTION_NAME).watch(List.of(filter)).forEach(c);
     }
 
     @Override
@@ -54,12 +54,5 @@ public class ExhausterDaoImpl implements ExhausterDao {
           .stream()
           .findFirst()
           .orElse(Map.of());
-    }
-
-    private List<Object> processChangeStream(ChangeStreamIterable<Document> changeStream, Consumer<Object> c) {
-        changeStream.forEach(c);
-        List<Object> metrics = new ArrayList<>();
-        changeStream.into(metrics);
-        return metrics;
     }
 }

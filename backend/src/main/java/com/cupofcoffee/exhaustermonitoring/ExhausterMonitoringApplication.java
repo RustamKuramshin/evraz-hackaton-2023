@@ -9,5 +9,4 @@ public class ExhausterMonitoringApplication {
     public static void main(String[] args) {
         SpringApplication.run(ExhausterMonitoringApplication.class, args);
     }
-
 }

@@ -11,24 +11,24 @@ import java.util.function.Consumer;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class ExhausterDaoImpl implements ExhausterDao {
+public class ExhausterDaoImpl {
 
-  @Override
+//  @Override
   public List<Object> getAllExhausterMetricsForAllMachines(Consumer<Object> c) {
     return null;
   }
 
-  @Override
+//  @Override
   public Object getExhausterMetricsByExhausterId(Consumer<Object> c, String exhausterId) {
     return null;
   }
 
-  @Override
+//  @Override
   public List<Object> getExhausterInfoForAllMachines() {
     return null;
   }
 
-  @Override
+//  @Override
   public Object getExhausterInfoByExhausterId(String exhausterId) {
     return null;
   }

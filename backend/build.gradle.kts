@@ -33,6 +33,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-paranamer")
 
     implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
+    implementation("org.influxdb:influxdb-java:2.8")
 
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")

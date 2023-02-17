@@ -1,20 +1,17 @@
 package com.cupofcoffee.exhaustermonitoring;
 
-import com.mongodb.client.ChangeStreamIterable;
 import com.mongodb.client.model.Filters;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.bson.conversions.Bson;
-import org.bson.Document;
 
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;

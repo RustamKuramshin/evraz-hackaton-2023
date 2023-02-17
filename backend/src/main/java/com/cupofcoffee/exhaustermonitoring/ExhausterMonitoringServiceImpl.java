@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExhausterMonitoringServiceImpl implements ExhausterMonitoringService {
 
+    private final ExhausterDao exhausterDao;
+
     @Override
     public InfoDto getInfo() {
         return InfoDto.builder().data("TEST").build();

@@ -98,6 +98,7 @@ services:
       - '8086:8086'
     volumes:
       - influxdb_data:/var/lib/influxdb
+
   postgres:
     image: postgres:12
     container_name: postgres_db
@@ -107,6 +108,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./initdb/:/docker-entrypoint-initdb.d
     environment:
       - POSTGRES_USER=pgadmin
       - POSTGRES_PASSWORD=pgadmin

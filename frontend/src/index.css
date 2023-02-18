@@ -1,13 +1,50 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+@import url("./vendor/normalize.css");
+@import url("./vendor/fonts/GTEesti.css");
+@import url("./blocks/page/page.css");
+@import url("./blocks/content/content.css");
+@import url("./blocks/header/header.css");
+@import url("./blocks/header/__left-group/header__left-group.css");
+@import url("./blocks/header/__right-group/header__right-group.css");
+@import url("./blocks/header/__logo-sector/header__logo-sector.css");
+@import url("./blocks/header/__menu-btn/header__menu-btn.css");
+@import url("./blocks/header/__logo/header__logo.css");
+@import url("./blocks/header/__name-page/header__name-page.css");
+@import url("./blocks/header/__avatar/header__avatar.css");
+@import url("./blocks/header/__drop-down-list/header__drop-down-list.css");
+@import url("./blocks/header/__separator/header__separator.css");
+@import url("./blocks/heading/heading.css");
+@import url("./blocks/heading/__logo/heading__logo.css");
+@import url("./blocks/heading/__text/heading__text.css");
+@import url("./blocks/aglomachines/aglomachines.css");
+@import url("./blocks/aglomachines/__legend/aglomachines__legend.css");
+@import url("./blocks/aglomachines/__elements/aglomachines__elements.css");
+@import url("./blocks/aglomachines/__title/aglomachines__title.css");
+@import url("./blocks/aglomachines/__list/aglomachines__list.css");
+@import url("./blocks/exgausters/exgausters.css");
+@import url("./blocks/exgauster/exgauster.css");
+@import url("./blocks/exgauster/__heading/exgauster__heading.css");
+@import url("./blocks/exgauster/__status-image/exgauster__status-image.css");
+@import url("./blocks/exgauster/__name/exgauster__name.css");
+@import url("./blocks/exgauster/__btn/exgauster__btn.css");
+@import url("./blocks/rotor/rotor.css");
+@import url("./blocks/rotor/__heading/rotor__heading.css");
+@import url("./blocks/rotor/__name/rotor__name.css");
+@import url("./blocks/rotor/__date/rotor__date.css");
+@import url("./blocks/rotor/__changing-link/rotor__changing-link.css");
+@import url("./blocks/rotor/__replacement-title/rotor__replacement-title.css");
+@import url("./blocks/rotor/__replacement/rotor__replacement.css");
+@import url("./blocks/rotor/__replacement-date/rotor__replacement-date.css");
+@import url("./blocks/rotor/__prognosis/rotor__prognosis.css");
+@import url("./blocks/rotor/__prognosis-title/rotor__prognosis-title.css");
+@import url("./blocks/rotor/__prognosis-days/rotor__prognosis-days.css");
+@import url("./blocks/rotor/__image/rotor__image.css");
+@import url("./blocks/bearing/__dropdown/bearing__dropdown.css");
+@import url("./blocks/bearing/__btn/bearing__btn.css");
+@import url("./blocks/bearing/__heading/bearing__heading.css");
+@import url("./blocks/bearing/bearing.css");
+@import url("./blocks/bearing/__title/bearing__title.css");
+@import url("./blocks/bearing/__images/bearing__images.css");
+@import url("./blocks/bearing/__liquid-image/bearing__liquid-image.css");
+@import url("./blocks/bearing/__temperature-image/bearing__temperature-image.css");
+@import url("./blocks/bearing/__vibration-image/bearing__vibration-image.css");
+@import url("./blocks/bearing/__vibration-image/_activity/bearing__vibration-image_disabled.css");

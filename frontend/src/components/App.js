@@ -1,11 +1,16 @@
-import './App.css';
+/// Нужно будет парсить значение, получаемое по ключу в float
+// Spring bot стандартный и jdk 16
 import React, { useEffect, useRef, useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import Api from '../utils/Api';
+import Header from './Header';
+import MainPage from './MainPage';
 
 function App() {
   const [data, setData] = useState({});
+  const [paginationName, setPaginationName] = useState('Прогнозная аналитика эксгаустеров');
   const socket = useRef(new WebSocket('ws://localhost:8080/'));
-  //const socket = useRef(new WebSocket('ws://51.250.23.216:38080/info'));
+  //const socket = useRef(new WebSocket('ws://51.250.23.216:38080/metrics'));
 
   //console.log([input, data]);
 
@@ -24,7 +29,7 @@ function App() {
       // console.log(input);
     }
 
-    socket.current.send("READY");
+    //socket.current.send("READY");
     return () => socket.current.onclose = () => {
       console.log('Closed Connection!');
     };
@@ -32,10 +37,14 @@ function App() {
   // }, [input, data]);
 
   return (
-    <div
-      style={{alignSelf: "center", justifySelf: "center"}}
-    >
-      {data["SM_Exgauster\\[8:1]"]}
+    <div className='page'>
+      <Header pageName={paginationName} />
+      <Switch>
+        <Route exact path='/'>
+          <MainPage/>
+          {/* {data["SM_Exgauster\\[8:1]"]} */}
+        </Route>
+      </Switch>
     </div>
 );
 }

@@ -1,0 +1,7 @@
+.aglomachines__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  max-width: 100%;
+}

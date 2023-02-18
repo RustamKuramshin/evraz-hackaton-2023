@@ -1,0 +1,13 @@
+.aglomachines__title {
+  background: #F4F4F4;
+  border-radius: 4px 4px 0px 0px;
+  padding: 10px 20px;
+  max-width: 100%;
+  font-family: 'GT Eesti';
+  font-style: normal;
+  font-weight: 375;
+  font-size: 15px;
+  line-height: 20px;
+  /* identical to box height, or 133% */
+  text-transform: capitalize;
+}

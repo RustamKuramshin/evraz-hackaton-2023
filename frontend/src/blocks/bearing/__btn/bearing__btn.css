@@ -1,0 +1,9 @@
+.bearing__btn {
+  width: 20px;
+  height: 20px;
+  margin: 0 6px 0 0;
+  background-image: url('../../../images/Dropdown_bearingsBtn.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}

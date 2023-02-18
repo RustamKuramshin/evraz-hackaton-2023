@@ -18,8 +18,6 @@ services:
     volumes:
       - './backend/src/main/resources/application.properties:/workspace/application.properties'
     container_name: exhauster-monitoring-api
-    links:
-      - influxdb
     ports:
       - "38080:8080"
     environment:
@@ -33,7 +31,7 @@ services:
       - INFLUX_USER=admin
       - INFLUX_PASS=admin
       - INFLUX_POLICY=defaultPolicy
-      - PG_DATASOURCE_URL=jdbc:postgresql://postgres_db:5435/monitoring
+      - PG_DATASOURCE_URL=jdbc:postgresql://postgres_db:5432/monitoring
       - PG_NAME=pgadmin
       - PG_PASS=pgadmin
     tty: true

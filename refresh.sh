@@ -13,5 +13,8 @@ cd backend
 docker compose up -d mongodb-primary  && \
 docker compose up -d mongodb-secondary && \
 docker compose up -d mongodb-arbiter && \
-docker compose up -d exhauster-monitoring-ui && \
-docker compose up -d exhauster-monitoring-api
+docker compose up -d influxdb && \
+docker compose up -d postgres && \
+docker compose up -d grafana && \
+docker compose up -d exhauster-monitoring-api && \
+docker compose up -d exhauster-monitoring-ui

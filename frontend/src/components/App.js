@@ -28,7 +28,7 @@ function App() {
     socket.current.onmessage = (event) => {
       let temp = JSON.parse(event.data);
       setData(temp);
-      console.log(data["SM_Exgauster\\[8:1]"]);
+      console.log(`WS RECEIVED MESSAGE ${new Date()} | metrics moment ${data["moment"]} | kafkaTimestamp ${data["kafkaTimestamp"]}: ${JSON.stringify(data)}`);
 
       // setInput(temp["SM_Exgauster\\[8:1]"]);
       // console.log(input);

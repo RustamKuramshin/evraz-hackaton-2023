@@ -13,6 +13,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -38,19 +40,13 @@ public class Notification {
     private LocalDateTime createdAt;
 
     @NotNull
-    @Column(name = "exhauster_id")
-    private String exhausterId;
-
-    @NotNull
-    @Column(name = "part_id")
-    private String partId;
+    @ManyToOne
+    @JoinColumn(name = "detail_uuid")
+    private Detail detail;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "notification_type")
     private NotificationType notificationType;
 
-    @NotNull
-    @Column(name = "description")
-    private String description;
 }

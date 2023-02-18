@@ -1,5 +1,7 @@
 package com.cupofcoffee.exhaustermonitoring;
 
+import com.cupofcoffee.exhaustermonitoring.db.pg.entities.Detail;
+import com.cupofcoffee.exhaustermonitoring.db.pg.entities.Exhauster;
 import com.cupofcoffee.exhaustermonitoring.db.pg.entities.Notification;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.Module;
@@ -73,6 +75,8 @@ public class CommonConfiguration {
             @Override
             public void configureRepositoryRestConfiguration(RepositoryRestConfiguration restConfig, CorsRegistry cors) {
 
+                restConfig.exposeIdsFor(Detail.class);
+                restConfig.exposeIdsFor(Exhauster.class);
                 restConfig.exposeIdsFor(Notification.class);
             }
         };

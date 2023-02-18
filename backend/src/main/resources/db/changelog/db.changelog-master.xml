@@ -5,24 +5,47 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
 
-    <changeSet id="1676724773724-1" author="andro (generated)">
+    <changeSet id="1676731450409-1" author="Alexander Yanchiy (generated)">
+        <createTable tableName="detail">
+            <column name="uuid" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_detail"/>
+            </column>
+            <column name="exhauster_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1676731450409-2" author="Alexander Yanchiy (generated)">
+        <createTable tableName="exhauster">
+            <column name="uuid" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_exhauster"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1676731450409-3" author="Alexander Yanchiy (generated)">
         <createTable tableName="notification">
             <column name="uuid" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_notification"/>
             </column>
             <column name="created_at" type="DATETIME"/>
-            <column name="exhauster_id" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="part_id" type="VARCHAR(255)">
+            <column name="detail_uuid" type="UUID">
                 <constraints nullable="false"/>
             </column>
             <column name="notification_type" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="description" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
+    </changeSet>
+    <changeSet id="1676731450409-4" author="Alexander Yanchiy (generated)">
+        <addForeignKeyConstraint baseColumnNames="exhauster_id" baseTableName="detail"
+                                 constraintName="FK_DETAIL_ON_EXHAUSTER" referencedColumnNames="uuid"
+                                 referencedTableName="exhauster"/>
+    </changeSet>
+    <changeSet id="1676731450409-5" author="Alexander Yanchiy (generated)">
+        <addForeignKeyConstraint baseColumnNames="detail_uuid" baseTableName="notification"
+                                 constraintName="FK_NOTIFICATION_ON_DETAIL_UUID" referencedColumnNames="uuid"
+                                 referencedTableName="detail"/>
     </changeSet>
 </databaseChangeLog>

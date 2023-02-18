@@ -36,6 +36,8 @@ dependencies {
     implementation("org.influxdb:influxdb-java:2.8")
 
     implementation("com.opencsv:opencsv:5.3")
+    implementation("org.apache.poi:poi:5.2.2")
+    implementation("org.apache.poi:poi-ooxml:5.2.2")
 
     implementation("jakarta.persistence:jakarta.persistence-api:2.2.3")
     implementation("org.hibernate:hibernate-core:5.6.10.Final")

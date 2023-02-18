@@ -21,8 +21,9 @@ import java.util.concurrent.TimeUnit;
 public class MetricsTimeSeriesDaoImpl implements MetricsTimeSeriesDao {
 
     private final InfluxDB influxDB;
+    
+    private final CsvMappingLoader csvMappingLoader;
 
-    // Принимает строки и переводит в нужнйый формат
     @Override
     public void saveMetricToInfluxDb(String key, Double value, String moment) throws ParseException {
 
@@ -31,9 +32,14 @@ public class MetricsTimeSeriesDaoImpl implements MetricsTimeSeriesDao {
         Date d = format.parse(moment);
         long milliseconds = d.getTime();
 
-        Point point = Point.measurement("moment")
+        Map<String, SignalDto> signals = csvMappingLoader.getSignals();
+
+        StringBuilder sb = new StringBuilder("Эксгаустер №");
+
+        Point point = Point.measurement("moments")
                 .time(milliseconds, TimeUnit.MILLISECONDS)
                 .addField(key, value)
+                .tag("Название Эксгаустера", sb.append(signals.get(key).getExhauster()).toString())
                 .build();
 
         influxDB.write(point);

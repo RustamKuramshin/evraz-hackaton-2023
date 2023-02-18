@@ -38,6 +38,15 @@ public class CommonConfiguration {
     @Value("${influx-db.policy}")
     private String influxDbPolicy;
 
+    @Value("${core.pool.size}")
+    private int corePoolSize;
+
+    @Value("${max.pool.size}")
+    private int maxPoolSize;
+
+    @Value("${queue.capacity}")
+    private int queueCapacity;
+
     @Bean
     public Module getJdk8Module() {
         return new Jdk8Module();
@@ -65,9 +74,9 @@ public class CommonConfiguration {
     @Bean
     public Executor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(10);
-        executor.setMaxPoolSize(20);
-        executor.setQueueCapacity(500);
+        executor.setCorePoolSize(corePoolSize);
+        executor.setMaxPoolSize(maxPoolSize);
+        executor.setQueueCapacity(queueCapacity);
         executor.setThreadNamePrefix("AsyncMethods-");
         executor.initialize();
         return executor;

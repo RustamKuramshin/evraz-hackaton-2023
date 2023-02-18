@@ -1,5 +1,5 @@
-# @no-log
 ### Создание уведомления
+# @no-log
 POST http://localhost:8080/notifications?projection=notificationInfo
 Content-Type: application/json
 
@@ -10,20 +10,18 @@ Content-Type: application/json
   "description": "Деталь сломана - треубется замена."
 }
 
-# @no-log
 ### Получение всех уведомлений
+# @no-log
 GET http://localhost:8080/notifications?projection=notificationInfo
 Content-Type: application/json
 
-
-# @no-log
 ### Получение уведомления по UUID
+# @no-log
 GET http://localhost:8080/notifications/1c69faf7-33fb-4201-bf6e-909f1a0d4bc0?projection=notificationInfo
 Content-Type: application/json
 
-
-# @no-log
 ### Изменение уведомления по UUID
+# @no-log
 PATCH http://localhost:8080/notifications/1c69faf7-33fb-4201-bf6e-909f1a0d4bc0?projection=notificationInfo
 Content-Type: application/json
 
@@ -31,6 +29,6 @@ Content-Type: application/json
   "notificationType": "OVERHEATED"
 }
 
-# @no-log
 ### Удаление уведомления по UUID
+# @no-log
 DELETE http://localhost:8080/notifications/1c69faf7-33fb-4201-bf6e-909f1a0d4bc0

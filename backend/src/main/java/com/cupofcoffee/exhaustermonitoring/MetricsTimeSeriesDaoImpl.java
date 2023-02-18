@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class MetricsTimeSeriesDaoImpl implements MetricsTimeSeriesDao {
 
     private final InfluxDB influxDB;
-    
+
     private final CsvMappingLoader csvMappingLoader;
 
     @Override
@@ -36,12 +36,27 @@ public class MetricsTimeSeriesDaoImpl implements MetricsTimeSeriesDao {
 
         StringBuilder sb = new StringBuilder("Эксгаустер №");
 
-        Point point = Point.measurement("moments")
-                .time(milliseconds, TimeUnit.MILLISECONDS)
-                .addField(key, value)
-                .tag("Название Эксгаустера", sb.append(signals.get(key).getExhauster()).toString())
-                .build();
+        SignalDto oneSignal = signals.get(key);
 
-        influxDB.write(point);
+        if (oneSignal != null) {
+            try {
+                Point point = Point.measurement("metrics")
+                        .time(milliseconds + 3 * 3600000, TimeUnit.MILLISECONDS)
+                        .addField(oneSignal.getComment(), value)
+                        .tag("Название Эксгаустера", sb.append(oneSignal.getExhauster()).toString())
+                        .tag("Метрика", oneSignal.getSignalMetrics())
+                        .tag("Тип", oneSignal.getType())
+                        .tag("Название", oneSignal.getComment())
+                        .tag("Активность", oneSignal.getActive())
+                        .tag("Узел", oneSignal.getGear())
+                        .tag("Тип сигнала", oneSignal.getSignalType())
+                        .tag("Описание тип сигнала", oneSignal.getSignalTypeDescr())
+                        .build();
+                influxDB.write(point);
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        }
+
     }
 }

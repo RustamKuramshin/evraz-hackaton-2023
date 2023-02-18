@@ -5,4 +5,24 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
 
+    <changeSet id="1676724773724-1" author="andro (generated)">
+        <createTable tableName="notification">
+            <column name="uuid" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_notification"/>
+            </column>
+            <column name="created_at" type="DATETIME"/>
+            <column name="exhauster_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="part_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notification_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

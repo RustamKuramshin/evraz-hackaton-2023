@@ -26,8 +26,8 @@ services:
       - MONGODB_DBNAME=metrics
       - MONGODB_USER=mongo
       - MONGODB_PASS=mongo
-      - INFLUX_DATASOURCE_URL=http://influxdb:8086
-      - INFLUX_NAME=influx
+      - INFLUX_HOST=influxdb
+      - INFLUX_PORT=8086
       - INFLUX_USER=admin
       - INFLUX_PASS=admin
       - INFLUX_POLICY=defaultPolicy

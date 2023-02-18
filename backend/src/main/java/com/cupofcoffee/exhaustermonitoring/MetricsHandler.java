@@ -5,7 +5,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.RFC4180Parser;
 import com.opencsv.RFC4180ParserBuilder;
-import com.opencsv.exceptions.CsvException;
+import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
@@ -17,8 +17,8 @@ import org.springframework.data.mongodb.core.messaging.MessageListener;
 import org.springframework.data.mongodb.core.messaging.MessageListenerContainer;
 import org.springframework.data.mongodb.core.messaging.Subscription;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.CloseStatus;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -28,8 +28,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -53,17 +53,16 @@ public class MetricsHandler extends TextWebSocketHandler {
         File fileWithSignals = ResourceUtils.getFile("classpath:signals_kafka.csv");
         RFC4180Parser rfc4180Parser = new RFC4180ParserBuilder().build();
         try (CSVReader reader = new CSVReaderBuilder(new FileReader(fileWithSignals))
-            .withSkipLines(1)
             .withCSVParser(rfc4180Parser)
-            .build()) {
-            List<String[]> r = reader.readAll();
-            signals = r.stream().collect(Collectors.toMap(k -> k[0], v -> SignalDto.builder()
-                .type(v[1])
-                .comment(v[2])
-                .exhauster(v[3])
-                .active(v[4])
-                .build()));
-        } catch (IOException | CsvException e) {
+            .build()
+        ) {
+            signals = new CsvToBeanBuilder<SignalDto>(reader)
+                .withType(SignalDto.class)
+                .build()
+                .parse()
+                .stream()
+                .collect(Collectors.toMap(SignalDto::getPlace, Function.identity()));
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -87,14 +86,14 @@ public class MetricsHandler extends TextWebSocketHandler {
         };
 
         ChangeStreamRequest.ChangeStreamRequestOptions options =
-                new ChangeStreamRequest.ChangeStreamRequestOptions(
-                        db,
-                        collection,
-                        ChangeStreamOptions.empty());
+            new ChangeStreamRequest.ChangeStreamRequestOptions(
+                db,
+                collection,
+                ChangeStreamOptions.empty());
 
         Subscription subscription = container.register(
-                new ChangeStreamRequest<>(listener, options),
-                SecurityProperties.User.class);
+            new ChangeStreamRequest<>(listener, options),
+            SecurityProperties.User.class);
     }
 
     @Override

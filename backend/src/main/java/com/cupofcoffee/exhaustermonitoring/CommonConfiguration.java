@@ -89,6 +89,7 @@ public class CommonConfiguration {
         return influxDB;
     }
 
+    @Bean
     public MessageListenerContainer getMessageListenerContainer(MongoTemplate mongoTemplate) {
         return new DefaultMessageListenerContainer(mongoTemplate);
     }

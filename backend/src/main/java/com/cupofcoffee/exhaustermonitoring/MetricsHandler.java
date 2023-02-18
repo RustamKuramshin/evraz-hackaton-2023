@@ -45,28 +45,6 @@ public class MetricsHandler extends TextWebSocketHandler {
 
     private final MessageListenerContainer container;
 
-    private Map<String, SignalDto> signals;
-
-    @PostConstruct
-    public void init() throws FileNotFoundException {
-
-        File fileWithSignals = ResourceUtils.getFile("classpath:signals_kafka.csv");
-        RFC4180Parser rfc4180Parser = new RFC4180ParserBuilder().build();
-        try (CSVReader reader = new CSVReaderBuilder(new FileReader(fileWithSignals))
-            .withCSVParser(rfc4180Parser)
-            .build()
-        ) {
-            signals = new CsvToBeanBuilder<SignalDto>(reader)
-                .withType(SignalDto.class)
-                .build()
-                .parse()
-                .stream()
-                .collect(Collectors.toMap(SignalDto::getPlace, Function.identity()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
 

@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 @SpringBootApplication
 public class ExhausterMonitoringApplication {
 
-    private final ExhausterDao exhausterDao;
+    private final ExhausterDaoImpl exhausterDao;
 
     public static void main(String[] args) {
         SpringApplication.run(ExhausterMonitoringApplication.class, args);
@@ -24,7 +24,7 @@ public class ExhausterMonitoringApplication {
 
     @PostConstruct
     public void onStartup() {
-//        log.info("MONGODB: Start read change stream");
-//        exhausterDao.getAllExhausterMetricsForAllMachines((Consumer<Object>) System.out::println);
+        log.info("MONGODB: Start read change stream");
+//        exhausterDao.getAllExhausterMetricsForAllMachines(System.out::println);
     }
 }

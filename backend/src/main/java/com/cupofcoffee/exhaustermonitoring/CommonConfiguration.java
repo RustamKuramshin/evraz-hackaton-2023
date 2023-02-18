@@ -9,6 +9,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paranamer.ParanamerModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.messaging.DefaultMessageListenerContainer;
+import org.springframework.data.mongodb.core.messaging.MessageListenerContainer;
 
 @Configuration
 public class CommonConfiguration {
@@ -35,5 +38,10 @@ public class CommonConfiguration {
                 .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
                 .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
                 .enable(SerializationFeature.WRITE_DATES_WITH_ZONE_ID);
+    }
+
+    @Bean
+    public MessageListenerContainer getMessageListenerContainer(MongoTemplate mongoTemplate) {
+        return new DefaultMessageListenerContainer(mongoTemplate);
     }
 }

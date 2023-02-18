@@ -26,34 +26,61 @@ services:
     tty: true
 
   metrics-db:
-#    container_name: mongodb4.4
-    hostname: metrics-db
-    image: mongo:6.0
-    volumes:
-      - ./data/db:/data/db
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - ./mongokeyfile:/docker-entrypoint-initdb.d/mongokeyfile
-      - ./mongod-config-file:/docker-entrypoint-initdb.d/mongod-config-file
-#    ports:
-#      - 35000:27017
-#    env_file:
-#      - .env
-#    image: docker.io/bitnami/mongodb:6.0
+    image: docker.io/bitnami/mongodb:6.0
     container_name: metrics-db
-    command: --replSet mstream --config /docker-entrypoint-initdb.d/mongod-config-file
     ports:
       - "37017:27017"
     restart: always
+    volumes:
+      - 'mongodb_data:/bitnami/mongodb'
+    environment:
+      MONGODB_ROOT_PASSWORD: mongo
+      MONGODB_USERNAME: mongo
+      MONGODB_PASSWORD: mongo
+      MONGODB_DATABASE: metrics
+
+  mongodb-primary:
+    image: docker.io/bitnami/mongodb:6.0
 #    volumes:
 #      - 'mongodb_data:/bitnami/mongodb'
     environment:
-      MONGO_INITDB_ROOT_USERNAME: mongo
-      MONGO_INITDB_ROOT_PASSWORD: mongo
-      MONGO_INITDB_DATABASE: metrics
-#      MONGODB_ROOT_PASSWORD: mongo
-#      MONGODB_USERNAME: mongo
-#      MONGODB_PASSWORD: mongo
-#      MONGODB_DATABASE: metrics
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_REPLICA_SET_KEY=123456789
+      - MONGODB_ROOT_USERNAME=mongoadm
+      - MONGODB_ROOT_PASSWORD=mongoadm
+      - MONGODB_USERNAME=mongo
+      - MONGODB_PASSWORD=mongo
+      - MONGODB_DATABASE=metrics
+    ports:
+      - "37017:27017"
+
+  mongodb-secondary:
+    image: docker.io/bitnami/mongodb:6.0
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_REPLICA_SET_MODE=secondary
+      - MONGODB_REPLICA_SET_KEY=123456789
+      - MONGODB_PRIMARY_HOST=mongodb-primary
+      - MONGODB_PRIMARY_PORT_NUMBER=27017
+      - MONGODB_PRIMARY_ROOT_USERNAME=mongoadm
+      - MONGODB_PRIMARY_ROOT_PASSWORD=mongoadm
+    ports:
+      - "37027:27017"
+
+  mongodb-arbiter:
+    image: docker.io/bitnami/mongodb:6.0
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter
+      - MONGODB_REPLICA_SET_MODE=arbiter
+      - MONGODB_PRIMARY_HOST=mongodb-primary
+      - MONGODB_PRIMARY_PORT_NUMBER=27017
+      - MONGODB_PRIMARY_ROOT_PASSWORD=mongoadm
+      - MONGODB_REPLICA_SET_KEY=123456789
+    ports:
+      - "37037:27017"
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.1

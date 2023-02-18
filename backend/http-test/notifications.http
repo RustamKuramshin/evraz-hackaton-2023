@@ -1,0 +1,36 @@
+# @no-log
+### Создание уведомления
+POST http://localhost:8080/notifications?projection=notificationInfo
+Content-Type: application/json
+
+{
+  "exhausterId": "1",
+  "partId": "Подшипник #3",
+  "notificationType": "BROKEN",
+  "description": "Деталь сломана - треубется замена."
+}
+
+# @no-log
+### Получение всех уведомлений
+GET http://localhost:8080/notifications?projection=notificationInfo
+Content-Type: application/json
+
+
+# @no-log
+### Получение уведомления по UUID
+GET http://localhost:8080/notifications/1c69faf7-33fb-4201-bf6e-909f1a0d4bc0?projection=notificationInfo
+Content-Type: application/json
+
+
+# @no-log
+### Изменение уведомления по UUID
+PATCH http://localhost:8080/notifications/1c69faf7-33fb-4201-bf6e-909f1a0d4bc0?projection=notificationInfo
+Content-Type: application/json
+
+{
+  "notificationType": "OVERHEATED"
+}
+
+# @no-log
+### Удаление уведомления по UUID
+DELETE http://localhost:8080/notifications/1c69faf7-33fb-4201-bf6e-909f1a0d4bc0

@@ -34,7 +34,7 @@ public class ExhausterDaoImpl implements ExhausterDao {
     @Override
     public List<Map<String, String>> getMetricsJsonBetweenStartDateAndEndDate(LocalDateTime start, LocalDateTime end) {
         AggregationOperation match = Aggregation.match(
-                Criteria.where(momentFieldName).gte(start).and(momentFieldName).lte(end)
+                Criteria.where(momentFieldName).gte(start).lte(end)
         );
         AggregationOperation sort = Aggregation.sort(Sort.Direction.DESC, momentFieldName);
         TypedAggregation<Map> pipeline = Aggregation.newAggregation(Map.class, match, sort);
@@ -48,7 +48,7 @@ public class ExhausterDaoImpl implements ExhausterDao {
     @Override
     public List<String> getAllMetricsByMetricNameBetweenStartDateAndEndDate(String metricName, LocalDateTime start, LocalDateTime end) {
         AggregationOperation match = Aggregation.match(
-                Criteria.where(momentFieldName).gte(start).and(momentFieldName).lte(end)
+                Criteria.where(momentFieldName).gte(start).lte(end)
         );
         AggregationOperation sort = Aggregation.sort(Sort.Direction.DESC, momentFieldName);
         AggregationOperation project = Aggregation.project(metricName);

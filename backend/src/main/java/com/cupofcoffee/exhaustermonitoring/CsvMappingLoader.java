@@ -95,8 +95,8 @@ public class CsvMappingLoader {
                 String cell5 = getCellValueOrDefault(row.getCell(4), null);
 
 
-                SignalMapping her = new SignalMapping(cell1, cell2, cell3, cell4, cell5);
-                signalMappings.add(her);
+                SignalMapping mapping = new SignalMapping(cell1, cell2, cell3, cell4, cell5);
+                signalMappings.add(mapping);
             }
         }
 

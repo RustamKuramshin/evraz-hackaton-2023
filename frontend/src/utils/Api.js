@@ -21,7 +21,7 @@ class Api {
 }
 
 export default new Api({
-  link: 'http://51.250.23.216:38080',
+  link: 'http://51.250.23.216:38080/',
   headers: {
     'Content-Type': 'application/json',
   }

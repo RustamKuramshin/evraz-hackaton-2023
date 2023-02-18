@@ -1,11 +1,18 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="exhauster-monitoring" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <envs>
-      <env name="MONGODB_HOST" value="localhost" />
-      <env name="MONGODB_PORT" value="37017" />
       <env name="MONGODB_DBNAME" value="metrics" />
-      <env name="MONGODB_USER" value="mongo" />
+      <env name="MONGODB_HOST" value="localhost" />
       <env name="MONGODB_PASS" value="mongo" />
+      <env name="MONGODB_PORT" value="37017" />
+      <env name="MONGODB_USER" value="mongo" />
+      <env name="PG_DATASOURCE_URL" value="jdbc:postgresql://localhost:15435/monitoring" />
+      <env name="PG_NAME" value="pgadmin" />
+      <env name="PG_PASS" value="pgadmin" />
+      <env name="INFLUX_DATASOURCE_URL" value="http://localhost:8086" />
+      <env name="INFLUX_NAME" value="influx" />
+      <env name="INFLUX_USER" value="admin" />
+      <env name="INFLUX_PASS" value="admin" />
     </envs>
     <module name="exhauster-monitoring.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.cupofcoffee.exhaustermonitoring.ExhausterMonitoringApplication" />

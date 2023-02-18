@@ -10,5 +10,8 @@ cd backend
 
 ./gradlew bootBuildImage
 
-docker compose up -d metrics-db exhauster-monitoring-api exhauster-monitoring-ui && \
-docker compose up -d exhauster-monitoring-ui
+docker compose up -d mongodb-primary  && \
+docker compose up -d mongodb-secondary && \
+docker compose up -d mongodb-arbiter && \
+docker compose up -d exhauster-monitoring-ui && \
+docker compose up -d exhauster-monitoring-api

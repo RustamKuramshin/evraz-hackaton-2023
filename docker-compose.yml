@@ -103,7 +103,7 @@ services:
     volumes:
       - influxdb_data:/var/lib/influxdb
 
-  postgres:
+  postgres_db:
     image: postgres:12
     container_name: postgres_db
     ports:

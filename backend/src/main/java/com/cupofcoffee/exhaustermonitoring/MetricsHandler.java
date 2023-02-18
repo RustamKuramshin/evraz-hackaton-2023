@@ -63,7 +63,6 @@ public class MetricsHandler extends TextWebSocketHandler {
                 .exhauster(v[3])
                 .active(v[4])
                 .build()));
-            signals.entrySet().forEach(x -> log.info(String.valueOf(x)));
         } catch (IOException | CsvException e) {
             throw new RuntimeException(e);
         }

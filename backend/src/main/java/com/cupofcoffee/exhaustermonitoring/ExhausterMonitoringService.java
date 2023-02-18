@@ -3,7 +3,6 @@ package com.cupofcoffee.exhaustermonitoring;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public interface ExhausterMonitoringService {
 
@@ -19,7 +18,4 @@ public interface ExhausterMonitoringService {
 
 
     String getLastMetricByMetricName(String metricName);
-
-
-    void readChangeStream(Consumer<Object> consumer);
 }

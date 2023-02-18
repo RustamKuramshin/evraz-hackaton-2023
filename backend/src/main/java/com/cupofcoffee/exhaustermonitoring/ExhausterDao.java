@@ -3,7 +3,6 @@ package com.cupofcoffee.exhaustermonitoring;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public interface ExhausterDao {
 
@@ -35,11 +34,4 @@ public interface ExhausterDao {
    * @return последнее значение метрики по ее имени
    */
   String getLastMetricByMetricName(String metricName);
-
-
-  /**
-   * Метод, который принимает консьюмера данными прочитанными из change stream'а монги
-   * @param consumer
-   */
-  void readChangeStream(Consumer<Object> consumer);
 }

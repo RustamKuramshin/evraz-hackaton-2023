@@ -20,4 +20,10 @@ public class SignalDto {
 
     @CsvBindByName(column = "active")
     private String active;
+
+    // From excel
+    private String gear;
+    private String signalMetrics;
+    private String signalTypeDescr;
+    private String signalType;
 }

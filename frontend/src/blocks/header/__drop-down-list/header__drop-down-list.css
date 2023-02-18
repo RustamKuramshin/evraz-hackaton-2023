@@ -1,0 +1,7 @@
+.header__drop-down-list {
+  background-image: url('../../../images/header_angle-down.svg');
+  background-position: center;
+  margin-left: 5px;
+  width: 16px;
+  height: 16px;
+}

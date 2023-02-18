@@ -1,0 +1,10 @@
+.bearing {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 10px;
+  margin: 4.5px 0 4.5px 18px;
+  background: #FAFAFA;
+  border-radius: 4px;
+}

@@ -1,0 +1,8 @@
+.header__avatar {
+  background-image: url('../../../images/header_square_ava.svg');
+  height: 40px;
+  width: 40px;
+  background-position: center;
+  border: none;
+  border-radius: 5px;
+}

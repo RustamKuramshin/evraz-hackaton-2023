@@ -1,0 +1,28 @@
+
+### Получение всех уведомлений
+# @no-log
+GET http://localhost:8080/api/v1/notifications?projection=notificationInfo
+Content-Type: application/json
+
+### Получение уведомления по UUID
+# @no-log
+GET http://localhost:8080/api/v1/notifications/1c69faf7-33fb-4201-bf6e-909f1a0d4bc0?projection=notificationInfo
+Content-Type: application/json
+
+### Получить сгруппированную информацию об ошибках (для боковой панели уведомлений)
+# @no-log
+GET http://localhost:8080/api/v1/notifications-grouped?dateFrom=2023-02-18T01:30:00.000-05:00
+Content-Type: application/json
+
+### Изменение уведомления по UUID
+# @no-log
+PATCH http://localhost:8080/api/v1/notifications/1c69faf7-33fb-4201-bf6e-909f1a0d4bc0?projection=notificationInfo
+Content-Type: application/json
+
+{
+  "notificationType": "OVERHEATED"
+}
+
+### Удаление уведомления по UUID
+# @no-log
+DELETE http://localhost:8080/api/v1/notifications/1c69faf7-33fb-4201-bf6e-909f1a0d4bc0

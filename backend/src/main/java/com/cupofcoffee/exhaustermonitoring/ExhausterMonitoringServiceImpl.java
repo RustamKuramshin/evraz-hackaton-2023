@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -46,11 +45,5 @@ public class ExhausterMonitoringServiceImpl implements ExhausterMonitoringServic
     public String getLastMetricByMetricName(String metricName) {
 
         return exhausterDao.getLastMetricByMetricName(metricName);
-    }
-
-    @Override
-    public void readChangeStream(Consumer<Object> consumer) {
-
-        exhausterDao.readChangeStream(consumer);
     }
 }

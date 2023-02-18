@@ -28,6 +28,7 @@ services:
       - MONGODB_PASS=mongo
       - INFLUX_HOST=influxdb
       - INFLUX_PORT=8086
+      - INFLUX_DBNAME=influx
       - INFLUX_USER=admin
       - INFLUX_PASS=admin
       - INFLUX_POLICY=defaultPolicy

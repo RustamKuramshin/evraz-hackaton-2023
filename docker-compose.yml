@@ -67,6 +67,20 @@ services:
       - MONGODB_PRIMARY_ROOT_PASSWORD=mongoadm
       - MONGODB_REPLICA_SET_KEY=123456789
 
+  postgres:
+    image: postgres:12
+    container_name: postgres_db
+    ports:
+      - "15435:5432"
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+    environment:
+      - POSTGRES_USER=pgadmin
+      - POSTGRES_PASSWORD=pgadmin
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+
 #  grafana:
 #    build: './backend/monitoring/config/grafana'
 #    container_name: grafana
@@ -79,5 +93,6 @@ services:
 #      - GF_SECURITY_ADMIN_PASSWORD=admin
 
 volumes:
+  db_data:
   mongodb_data:
     driver: local

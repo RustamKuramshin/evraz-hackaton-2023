@@ -26,17 +26,21 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
+    implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.springframework.kafka:spring-kafka")
-
 
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
     implementation("com.fasterxml.jackson.module:jackson-module-paranamer")
 
     implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
-
     implementation("com.opencsv:opencsv:5.3")
 
+    implementation("jakarta.persistence:jakarta.persistence-api:2.2.3")
+    implementation("org.hibernate:hibernate-core:5.6.10.Final")
+
     compileOnly("org.projectlombok:lombok")
+
+    runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

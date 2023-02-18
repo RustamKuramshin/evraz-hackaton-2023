@@ -33,7 +33,7 @@ services:
       - INFLUX_USER=admin
       - INFLUX_PASS=admin
       - INFLUX_POLICY=defaultPolicy
-      - PG_DATASOURCE_URL=jdbc:postgresql://postgres_db:15435/monitoring
+      - PG_DATASOURCE_URL=jdbc:postgresql://postgres_db:5435/monitoring
       - PG_NAME=pgadmin
       - PG_PASS=pgadmin
     tty: true

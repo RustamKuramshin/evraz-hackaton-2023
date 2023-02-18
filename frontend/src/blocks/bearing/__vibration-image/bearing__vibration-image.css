@@ -1,0 +1,8 @@
+.bearing__vibration-image {
+  background-image: url('../../../images/Vibration_Frame.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 36px;
+  height: 20px;
+}

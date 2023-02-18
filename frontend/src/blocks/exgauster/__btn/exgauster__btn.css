@@ -1,0 +1,9 @@
+.exgauster__btn {
+  border: none;
+  background-image: url('../../../images/control-btn_exgaust.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 5px;
+  width: 26px;
+  height: 26px;
+}

@@ -1,5 +1,8 @@
 package com.cupofcoffee.exhaustermonitoring;
 
+import com.cupofcoffee.exhaustermonitoring.db.pg.entities.Detail;
+import com.cupofcoffee.exhaustermonitoring.db.pg.entities.Exhauster;
+import com.cupofcoffee.exhaustermonitoring.db.pg.entities.Notification;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,16 +12,18 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paranamer.ParanamerModule;
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBFactory;
-import org.influxdb.dto.Pong;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
-import java.util.concurrent.Executor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.messaging.DefaultMessageListenerContainer;
 import org.springframework.data.mongodb.core.messaging.MessageListenerContainer;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+
+import java.util.concurrent.Executor;
 
 @Configuration
 public class CommonConfiguration {
@@ -66,12 +71,27 @@ public class CommonConfiguration {
     }
 
     @Bean
+    public RepositoryRestConfigurer repositoryRestConfigurer() {
+
+        return new RepositoryRestConfigurer() {
+
+            @Override
+            public void configureRepositoryRestConfiguration(RepositoryRestConfiguration restConfig, CorsRegistry cors) {
+
+                restConfig.exposeIdsFor(Detail.class);
+                restConfig.exposeIdsFor(Exhauster.class);
+                restConfig.exposeIdsFor(Notification.class);
+            }
+        };
+    }
+
+    @Bean
     public ObjectMapper getObjectMapper() {
         return new ObjectMapper().registerModule(new JavaTimeModule())
-                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-                .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
-                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .enable(SerializationFeature.WRITE_DATES_WITH_ZONE_ID);
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+            .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
+            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(SerializationFeature.WRITE_DATES_WITH_ZONE_ID);
     }
 
     @Bean
@@ -94,7 +114,7 @@ public class CommonConfiguration {
 
         influxDB.createDatabase(influxDbDbname);
         influxDB.createRetentionPolicy(
-                influxDbPolicy, influxDbDbname, "30d", 1, true);
+            influxDbPolicy, influxDbDbname, "30d", 1, true);
 
         influxDB.setRetentionPolicy(influxDbPolicy);
         influxDB.setDatabase(influxDbDbname);

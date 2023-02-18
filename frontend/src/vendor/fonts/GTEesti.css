@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'GT Eesti';
+    font-style:  normal;
+    font-weight: 375;
+    font-display: swap;
+    src: url('GTEestiProText-Book.woff2') format('woff2'),
+        url('GTEestiProText-Book.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'GT Eesti';
+    font-style:  normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('GTEestiProText-Bold.woff2') format('woff2'),
+        url('GTEestiProText-Bold.woff') format('woff');
+}

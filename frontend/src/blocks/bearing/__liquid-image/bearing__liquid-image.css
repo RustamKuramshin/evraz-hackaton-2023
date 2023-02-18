@@ -1,0 +1,8 @@
+.bearing__liquid-image {
+  background-image: url('../../../images/Liquid_Frame.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 36px;
+  height: 20px;
+}

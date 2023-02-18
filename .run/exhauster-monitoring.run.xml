@@ -12,6 +12,9 @@
       <env name="MONGODB_PASS" value="mongo" />
       <env name="MONGODB_PORT" value="37017" />
       <env name="MONGODB_USER" value="mongo" />
+      <env name="PG_DATASOURCE_URL" value="jdbc:postgresql://localhost:15435/monitoring" />
+      <env name="PG_NAME" value="pgadmin" />
+      <env name="PG_PASS" value="pgadmin" />
     </envs>
     <module name="exhauster-monitoring.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.cupofcoffee.exhaustermonitoring.ExhausterMonitoringApplication" />

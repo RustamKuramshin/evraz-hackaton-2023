@@ -105,7 +105,34 @@ services:
     volumes:
       - influxdb_data:/var/lib/influxdb
 
+  postgres:
+    image: postgres:12
+    container_name: postgres_db
+    ports:
+      - "15435:5432"
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./initdb/:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=pgadmin
+      - POSTGRES_PASSWORD=pgadmin
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+
+#  grafana:
+#    build: './backend/monitoring/config/grafana'
+#    container_name: grafana
+#    ports:
+#      - "33000:3000"
+##    volumes:
+##      - ./backend/monitoring/grafana:/var/lib/grafana
+#    environment:
+#      - GF_SECURITY_ADMIN_USER=admin
+#      - GF_SECURITY_ADMIN_PASSWORD=admin
+
 volumes:
+  db_data:
   mongodb_data:
     driver: local
   influxdb_data:

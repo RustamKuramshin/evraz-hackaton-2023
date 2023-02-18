@@ -30,6 +30,12 @@ services:
       - MONGODB_DBNAME=metrics
       - MONGODB_USER=mongo
       - MONGODB_PASS=mongo
+      - INFLUX_HOST=influxdb
+      - INFLUX_PORT=8086
+      - INFLUX_USER=admin
+      - INFLUX_PASS=admin
+      - INFLUX_DBNAME=influx
+      - INFLUX_POLICY=defaultPolicy
     tty: true
 
   mongodb-primary:

@@ -23,8 +23,11 @@ import org.springframework.data.mongodb.core.messaging.MessageListenerContainer;
 @Configuration
 public class CommonConfiguration {
 
-    @Value("${influx-db.url}")
-    private String influxDbUrl;
+    @Value("${influx-db.host}")
+    private String influxDbHost;
+
+    @Value("${influx-db.port}")
+    private String influxDbPort;
 
     @Value("${influx-db.user}")
     private String influxDbUser;
@@ -84,7 +87,10 @@ public class CommonConfiguration {
 
     @Bean
     public InfluxDB influxClient() {
-        InfluxDB influxDB = InfluxDBFactory.connect(influxDbUrl, influxDbUser, influxDbPassword);
+
+        String influxDBUrl = String.format("http://%s:%s",influxDbHost, influxDbPort);
+
+        InfluxDB influxDB = InfluxDBFactory.connect(influxDBUrl, influxDbUser, influxDbPassword);
 
         influxDB.createDatabase(influxDbDbname);
         influxDB.createRetentionPolicy(

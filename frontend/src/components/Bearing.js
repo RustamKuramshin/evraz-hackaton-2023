@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function Bearing({title}) {
+export default function Bearing({
+  title,
+}) {
+// запись вычисления замеров на каждый подшипник и масляной бак
+// по эксгаустерам [min, max, state]
+
   const isVibrationThere = title === '№1  п-к' || title === '№2  п-к' || title === '№7  п-к' || title === '№8  п-к';
   const isThisLiquid = title === 'Уровень масла';
 

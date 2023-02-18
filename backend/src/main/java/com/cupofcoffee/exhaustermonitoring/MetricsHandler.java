@@ -55,7 +55,9 @@ public class MetricsHandler extends TextWebSocketHandler {
         MessageListener<ChangeStreamDocument<Document>, SecurityProperties.User> listener = message1 -> {
 
             try {
-                String metrics = message1.getRaw().getFullDocument().toJson();
+                Document fullDocument = message1.getRaw().getFullDocument();
+                fullDocument.remove("_id");
+                String metrics = fullDocument.toJson();
                 log.info("WS MESSAGE SENT: {}", metrics);
                 session.sendMessage(new TextMessage(metrics));
             } catch (IOException e) {

@@ -9,27 +9,31 @@ import MainPage from './MainPage';
 function App() {
   const [data, setData] = useState({});
   const [paginationName, setPaginationName] = useState('Прогнозная аналитика эксгаустеров');
-  const socket = useRef(new WebSocket('ws://localhost:8080/'));
-  //const socket = useRef(new WebSocket('ws://51.250.23.216:38080/metrics'));
+  //const socket = useRef(new WebSocket('ws://localhost:8080/'));
+  const socket = useRef(new WebSocket('ws://51.250.23.216:38080/metrics'));
 
   //console.log([input, data]);
+
+  const handleGoToMnenoshemePageClick = (exgausterName) => {
+    setPaginationName(`Прогнозная аналитика эксгаустеров / Состояние эксгаустера ${exgausterName}`)
+  }
 
   useEffect(() => {
     socket.current.onopen = () => {
       console.log('Opened Connection!');
-      Api.getInfo();
+      socket.current.send("READY");
+      //Api.getInfo();
     };
 
     socket.current.onmessage = (event) => {
       let temp = JSON.parse(event.data);
       setData(temp);
-      console.log(data["SM_Exgauster\\[8:1]"]);
+      console.log(`WS RECEIVED MESSAGE ${new Date()} | metrics moment ${data["moment"]} | kafkaTimestamp ${data["kafkaTimestamp"]}: ${JSON.stringify(data)}`);
 
       // setInput(temp["SM_Exgauster\\[8:1]"]);
       // console.log(input);
     }
 
-    //socket.current.send("READY");
     return () => socket.current.onclose = () => {
       console.log('Closed Connection!');
     };
@@ -41,12 +45,14 @@ function App() {
       <Header pageName={paginationName} />
       <Switch>
         <Route exact path='/'>
-          <MainPage/>
+          <MainPage
+            data={data}
+            handleMnemoshemeClick={handleGoToMnenoshemePageClick}
+          />
           {/* {data["SM_Exgauster\\[8:1]"]} */}
         </Route>
       </Switch>
     </div>
-);
-}
+);}
 
 export default App;

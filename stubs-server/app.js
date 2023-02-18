@@ -21,7 +21,7 @@ wss.on('connection', (ws) => {
       ws.send(JSON.stringify(info[i]));
       i++;
     }
-  }, 100);
+  }, 500);
 
   ws.on('message', (msg) => {
     console.log(msg);

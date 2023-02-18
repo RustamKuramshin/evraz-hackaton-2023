@@ -7,7 +7,13 @@ import schema from '../images/Scheme.svg'
 
 import Bearing from "./Bearing";
 
-export default function MainPage() {
+export default function MainPage({handleMnemoshemeClick, data}) {
+  const selectEllipseStatus = (nameExgauster) => {
+    if(data[nameExgauster] === 1)
+      return ellips_green;
+    else
+      return ellips_red;
+  }
 
   return(
     <main className="content">
@@ -24,9 +30,14 @@ export default function MainPage() {
             <div className="exgausters">
               <div className="exgauster"> {/*1 из эксгаустеров в машине*/}
                 <div className="exgauster__heading">
-                  <img className="exgauster__status-image" src={ellips_red} alt="Эллипс статуса работы эксгаустера"/>
+                  <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[2.0]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер У-171</p>
-                  <button className="exgauster__btn"></button>
+                  <button
+                    className="exgauster__btn"
+                    onClick={() => {
+                      handleMnemoshemeClick('Эксгаустера У-171')
+                    }}
+                  ></button>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -47,7 +58,9 @@ export default function MainPage() {
                     <button className="bearing__btn"></button>
                     <p className="bearing__heading">Все подшипники</p>
                   </div>
-                  <Bearing title={'№1  п-к'}/>
+                  <Bearing
+                    title={'№1  п-к'}
+                  />
                   <Bearing title={'№2  п-к'}/>
                   <Bearing title={'№3  п-к'}/>
                   <Bearing title={'№4  п-к'}/>
@@ -62,9 +75,14 @@ export default function MainPage() {
 
               <div className="exgauster"> {/*1 из эксгаустеров в машине*/}
                 <div className="exgauster__heading">
-                  <img className="exgauster__status-image" src={ellips_red} alt="Эллипс статуса работы эксгаустера"/>
+                  <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[2.1]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер У-172</p>
-                  <button className="exgauster__btn"></button>
+                  <button
+                    className="exgauster__btn"
+                    onClick={() => {
+                      handleMnemoshemeClick('Эксгаустера У-172')
+                    }}
+                  ></button>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -107,9 +125,14 @@ export default function MainPage() {
             <div className="exgausters">
               <div className="exgauster"> {/*1 из эксгаустеров в машине*/}
                 <div className="exgauster__heading">
-                  <img className="exgauster__status-image" src={ellips_red} alt="Эллипс статуса работы эксгаустера"/>
+                  <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[0.0]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер Ф-171</p>
-                  <button className="exgauster__btn"></button>
+                  <button
+                    className="exgauster__btn"
+                    onClick={() => {
+                      handleMnemoshemeClick('Эксгаустера Ф-171')
+                    }}
+                  ></button>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -145,9 +168,14 @@ export default function MainPage() {
 
               <div className="exgauster"> {/*1 из эксгаустеров в машине*/}
                 <div className="exgauster__heading">
-                  <img className="exgauster__status-image" src={ellips_red} alt="Эллипс статуса работы эксгаустера"/>
+                  <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[0.1]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер Ф-172</p>
-                  <button className="exgauster__btn"></button>
+                  <button
+                    className="exgauster__btn"
+                    onClick={() => {
+                      handleMnemoshemeClick('Эксгаустера Ф-172')
+                    }}
+                  ></button>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -188,9 +216,14 @@ export default function MainPage() {
             <div className="exgausters">
               <div className="exgauster"> {/*1 из эксгаустеров в машине*/}
                 <div className="exgauster__heading">
-                  <img className="exgauster__status-image" src={ellips_red} alt="Эллипс статуса работы эксгаустера"/>
+                  <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[3.0]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер Х-171</p>
-                  <button className="exgauster__btn"></button>
+                  <button
+                    className="exgauster__btn"
+                    onClick={() => {
+                      handleMnemoshemeClick('Эксгаустера Х-171')
+                    }}
+                  ></button>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -226,9 +259,14 @@ export default function MainPage() {
 
               <div className="exgauster"> {/*1 из эксгаустеров в машине*/}
                 <div className="exgauster__heading">
-                  <img className="exgauster__status-image" src={ellips_green} alt="Эллипс статуса работы эксгаустера"/>
-                  <p className="exgauster__name">Эксгаустер Х-171</p>
-                  <button className="exgauster__btn"></button>
+                  <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[3.1]")} alt="Эллипс статуса работы эксгаустера"/>
+                  <p className="exgauster__name">Эксгаустер Х-172</p>
+                  <button
+                    className="exgauster__btn"
+                    onClick={() => {
+                      handleMnemoshemeClick('Эксгаустера Х-172')
+                    }}
+                  ></button>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">

@@ -18,6 +18,10 @@ services:
     volumes:
       - './backend/src/main/resources/application.properties:/workspace/application.properties'
     container_name: exhauster-monitoring-api
+    depends_on:
+      - influxdb
+    links:
+      - influxdb
     ports:
       - "38080:8080"
     environment:
@@ -67,17 +71,36 @@ services:
       - MONGODB_PRIMARY_ROOT_PASSWORD=mongoadm
       - MONGODB_REPLICA_SET_KEY=123456789
 
-#  grafana:
-#    build: './backend/monitoring/config/grafana'
-#    container_name: grafana
-#    ports:
-#      - "33000:3000"
-##    volumes:
-##      - ./backend/monitoring/grafana:/var/lib/grafana
-#    environment:
-#      - GF_SECURITY_ADMIN_USER=admin
-#      - GF_SECURITY_ADMIN_PASSWORD=admin
+  grafana:
+    build: './backend/monitoring/config/grafana'
+    container_name: grafana
+    ports:
+      - "33001:3000"
+    depends_on:
+      - influxdb
+    links:
+      - influxdb
+#    volumes:
+#      - ./backend/monitoring/grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+  influxdb:
+    image: influxdb:1.8-alpine
+    container_name: influxdb
+    restart: always
+    environment:
+      - INFLUXDB_DB=influx
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin
+    ports:
+      - '8086:8086'
+    volumes:
+      - influxdb_data:/var/lib/influxdb
 
 volumes:
   mongodb_data:
+    driver: local
+  influxdb_data:
     driver: local

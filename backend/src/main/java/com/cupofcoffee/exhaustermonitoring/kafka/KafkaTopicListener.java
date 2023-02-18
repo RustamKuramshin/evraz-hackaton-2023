@@ -1,5 +1,7 @@
 package com.cupofcoffee.exhaustermonitoring.kafka;
 
+import com.cupofcoffee.exhaustermonitoring.MetricsTimeSeriesService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,14 +23,23 @@ public class KafkaTopicListener {
   @Value("${mongo.collection}")
   private String collection;
 
+  private final MetricsTimeSeriesService metricsTimeSeriesService;
+
   @KafkaListener(
     topics = "${kafka-topic}",
     groupId = "${kafka.group-id}"
   )
   public void handle(ConsumerRecord<?, ?> record) {
+    String message = record.value().toString();
+
+    try {
+      metricsTimeSeriesService.saveToInfluxDb(message);
+    } catch (Exception e) {
+      log.error(e.getMessage(), e);
+    }
+
     log.info("Got kafka msg: ...");
     try {
-      String message = record.value().toString();
       log.debug(message);
 
       HashMap<Object, Object> dataMap = objectMapper.readValue(message, HashMap.class);

@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 
 const WebSock = () => {
-  const socket = new WebSocket('ws://51.250.23.216:38080/info');
+  const socket = new WebSocket('ws://51.250.23.216:38080/metrics');
 
 
   socket.onopen = () => {

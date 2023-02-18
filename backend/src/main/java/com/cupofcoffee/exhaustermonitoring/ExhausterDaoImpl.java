@@ -1,7 +1,14 @@
 package com.cupofcoffee.exhaustermonitoring;
 
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.changestream.ChangeStreamDocument;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -14,25 +21,13 @@ import java.util.function.Consumer;
 @Component
 public class ExhausterDaoImpl implements ExhausterDao {
 
-    //  @Override
-    public List<Object> getAllExhausterMetricsForAllMachines(Consumer<Object> c) {
-        return null;
-    }
+    private static final String METRICS_COLLECTION_NAME = "metrics-0";
 
-    //  @Override
-    public Object getExhausterMetricsByExhausterId(Consumer<Object> c, String exhausterId) {
-        return null;
-    }
+    private static final String EXHAUSTER_ID_FIELD_NAME = "exhausterId";
 
-    //  @Override
-    public List<Object> getExhausterInfoForAllMachines() {
-        return null;
-    }
+    private final MongoTemplate mongoTemplate;
 
-    //  @Override
-    public Object getExhausterInfoByExhausterId(String exhausterId) {
-        return null;
-    }
+    // НОВЫЕ МЕТОДЫ ДЛЯ РЕАЛИЗАЦИИ
 
     @Override
     public List<Map<String, String>> getMetricsJsonBetweenStartDateAndEndDate(LocalDateTime start, LocalDateTime end) {
@@ -57,5 +52,29 @@ public class ExhausterDaoImpl implements ExhausterDao {
     @Override
     public void readChangeStream(Consumer<Object> consumer) {
 
+    }
+
+    // РЕАЛИЗАЦИЯ СТРАХ МЕТОДОВ (БРАТЬ ДЛЯ ПРИМЕРА)
+
+    public void getExhausterMetricsByExhausterId(Consumer<Object> c, String exhausterId) {
+        Bson filter = Filters.eq(EXHAUSTER_ID_FIELD_NAME, exhausterId);
+        mongoTemplate.getCollection(METRICS_COLLECTION_NAME).watch(List.of(filter)).forEach(c);
+    }
+
+    public List<Map> getExhausterInfoForAllMachines() {
+        return mongoTemplate.findAll(Map.class, METRICS_COLLECTION_NAME);
+    }
+
+    public void getAllExhausterMetricsForAllMachines(Consumer<ChangeStreamDocument<Document>> c) {
+        mongoTemplate.getCollection(METRICS_COLLECTION_NAME).watch().forEach(c);
+    }
+
+    public Map getExhausterInfoByExhausterId(String exhausterId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where(EXHAUSTER_ID_FIELD_NAME).is(exhausterId));
+        return mongoTemplate.find(query, Map.class, METRICS_COLLECTION_NAME)
+                .stream()
+                .findFirst()
+                .orElse(Map.of());
     }
 }

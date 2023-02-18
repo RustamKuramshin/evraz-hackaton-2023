@@ -34,6 +34,8 @@ dependencies {
 
     implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
 
+    implementation("com.opencsv:opencsv:5.3")
+
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     annotationProcessor("org.projectlombok:lombok")

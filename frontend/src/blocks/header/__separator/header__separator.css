@@ -1,0 +1,7 @@
+.header__separator {
+  padding: 0;
+  margin: 0;
+  height: 34px;
+  width: 1px;
+  background: url('../../../images/separator.svg');
+}

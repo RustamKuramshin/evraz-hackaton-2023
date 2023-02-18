@@ -1,0 +1,6 @@
+.header__left-group {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}

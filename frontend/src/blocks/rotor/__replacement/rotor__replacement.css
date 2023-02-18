@@ -1,0 +1,9 @@
+.rotor__replacement {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 20px;
+  background: #FAFAFA;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}

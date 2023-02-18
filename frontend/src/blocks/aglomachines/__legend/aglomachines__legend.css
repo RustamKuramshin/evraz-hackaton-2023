@@ -1,0 +1,10 @@
+.aglomachines__legend {
+  background-image: url('../../../images/legend.svg');
+  background-repeat: no-repeat;
+  background-position: right;
+  justify-self: center;
+  height: 18px;
+  max-width: 100%;
+  padding: 18px 0;
+  margin-right: 16px;
+}

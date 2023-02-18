@@ -1,0 +1,14 @@
+.exgauster__heading {
+  display: flex;
+  flex-direction: row;
+  background: #6E6E6D;
+  border-radius: 4px 4px 0px 0px;
+  width: 100%;
+  align-items: center;
+  font-family: 'GT Eesti';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 17px;
+  color: #FFFFFF;
+}

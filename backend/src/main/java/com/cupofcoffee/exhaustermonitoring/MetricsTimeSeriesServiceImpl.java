@@ -36,7 +36,6 @@ public class MetricsTimeSeriesServiceImpl implements MetricsTimeSeriesService {
     @Value("${influx-db.dbname}")
     private String influxDbDbname;
 
-    @Async
     @Override
     public void saveToInfluxDb(String metricsJson) throws JsonProcessingException, ParseException {
         HashMap<String, Object> metricsMap = metricsConverter.convertMetricsToMap(metricsJson);

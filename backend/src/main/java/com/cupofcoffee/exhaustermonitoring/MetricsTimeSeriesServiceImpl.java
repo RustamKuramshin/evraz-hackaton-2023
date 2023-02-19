@@ -40,13 +40,6 @@ public class MetricsTimeSeriesServiceImpl implements MetricsTimeSeriesService {
     public void saveToInfluxDb(String metricsJson) throws JsonProcessingException, ParseException {
         HashMap<String, Object> metricsMap = metricsConverter.convertMetricsToMap(metricsJson);
 
-        String moment = (String) metricsMap.get("moment");
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
-
-        Date d = format.parse(moment);
-        long milliseconds = d.getTime();
-
         Map<String, SignalDto> signals = csvMappingLoader.getSignals();
 
         metricsMap.remove("moment");
@@ -63,7 +56,7 @@ public class MetricsTimeSeriesServiceImpl implements MetricsTimeSeriesService {
             if (oneSignal != null) {
 
                 Point.Builder pointBuilder = Point.measurement("metrics")
-                        .time(milliseconds + 3 * 3600000, TimeUnit.MILLISECONDS)
+                        .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
                         .addField(k, (Double) v);
 
                 if (oneSignal.getExhauster() != null) {

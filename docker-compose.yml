@@ -5,7 +5,6 @@ services:
     build:
       context: frontend
       dockerfile: DockerfileFrontend
-    restart: always
     container_name: exhauster-monitoring-ui
     ports:
       - "80:80"
@@ -14,7 +13,6 @@ services:
   exhauster-monitoring-api:
     image: docker.io/library/exhauster-monitoring:1.0.0
     command: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005", "-Dconfig.file=/workspace/application.properties", "-jar", "exhauster-monitoring:1.0.0.jar"]
-    restart: always
     volumes:
       - './backend/src/main/resources/application.properties:/workspace/application.properties'
     container_name: exhauster-monitoring-api
@@ -92,7 +90,6 @@ services:
   influxdb:
     image: influxdb:1.8-alpine
     container_name: influxdb
-    restart: always
     environment:
       - INFLUXDB_DB=influx
       - INFLUXDB_ADMIN_USER=admin
@@ -107,7 +104,6 @@ services:
     container_name: postgres_db
     ports:
       - "15435:5432"
-    restart: always
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./postgresql.conf:/etc/postgresql/postgresql.conf

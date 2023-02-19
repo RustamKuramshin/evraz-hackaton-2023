@@ -4,10 +4,11 @@ import ellips_red from '../images/Ellipse_red.svg';
 import ellips_green from '../images/Ellipse_green.svg';
 import schema from '../images/Scheme.svg';
 import Bearing from "./Bearing";
+import { Route, Switch, Link } from "react-router-dom";
 const { dataForExg } = require('../utils/ExgaustersData');
 
-export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
-  console.log(dataForExg);
+export default function MainPage({handleMnemoshemeClick, data, boolCheck, oilFirst, oilSecond,
+  oilThird, oilFourth, exgOneT_array}) {
   const selectEllipseStatus = (nameExgauster) => {
     if(data[nameExgauster] === 1)
       return ellips_green;
@@ -32,12 +33,14 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[2.0]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер У-171</p>
-                  <button
-                    className="exgauster__btn"
-                    onClick={() => {
-                      handleMnemoshemeClick('У-171')
-                    }}
-                  ></button>
+                  <Link to='/metrics'>
+                    <button
+                      className="exgauster__btn"
+                      onClick={() => {
+                        handleMnemoshemeClick('У-171')
+                      }}
+                    ></button>
+                  </Link>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -64,6 +67,7 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
                     keys={dataForExg}
                     exhauster={'Эксгаустер У-171'}
                     boolCheck={boolCheck}
+
                   />
                   <Bearing
                     title={'№2  п-к'}
@@ -127,6 +131,7 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
                     keys={dataForExg}
                     exhauster={'Эксгаустер У-171'}
                     boolCheck={boolCheck}
+                    oilModify={oilFirst}
                   />
                 </div>
               </div>
@@ -135,12 +140,14 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[2.1]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер У-172</p>
+                  <Link to='/metrics'>
                   <button
                     className="exgauster__btn"
                     onClick={() => {
                       handleMnemoshemeClick('У-172')
                     }}
                   ></button>
+                  </Link>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -230,6 +237,7 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
                     keys={dataForExg}
                     exhauster={'Эксгаустер У-172'}
                     boolCheck={boolCheck}
+                    oilModify={oilSecond}
                   />
                 </div>
               </div>
@@ -245,12 +253,14 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[0.0]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер Ф-171</p>
-                  <button
-                    className="exgauster__btn"
-                    onClick={() => {
-                      handleMnemoshemeClick('Ф-171')
-                    }}
-                  ></button>
+                  <Link to='/metrics'>
+                    <button
+                      className="exgauster__btn"
+                      onClick={() => {
+                        handleMnemoshemeClick('Ф-171')
+                      }}
+                    ></button>
+                  </Link>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -340,6 +350,7 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
                     keys={dataForExg}
                     exhauster={'Эксгаустер Ф-171'}
                     boolCheck={boolCheck}
+                    oilModify={oilThird}
                   />
                 </div>
               </div>
@@ -348,12 +359,14 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[0.1]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер Ф-172</p>
+                  <Link to='/metrics'>
                   <button
                     className="exgauster__btn"
                     onClick={() => {
                       handleMnemoshemeClick('Ф-172')
                     }}
                   ></button>
+                  </Link>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -443,6 +456,7 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
                     keys={dataForExg}
                     exhauster={'Эксгаустер Ф-172'}
                     boolCheck={boolCheck}
+                    oilModify={oilFourth}
                   />
                 </div>
               </div>
@@ -456,12 +470,14 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[3.0]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер Х-171</p>
-                  <button
-                    className="exgauster__btn"
-                    onClick={() => {
-                      handleMnemoshemeClick('Х-171')
-                    }}
-                  ></button>
+                  <Link to='/metrics'>
+                    <button
+                      className="exgauster__btn"
+                      onClick={() => {
+                        handleMnemoshemeClick('Х-171')
+                      }}
+                    ></button>
+                  </Link>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -559,12 +575,15 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[3.1]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер Х-172</p>
-                  <button
-                    className="exgauster__btn"
-                    onClick={() => {
-                      handleMnemoshemeClick('Х-172')
+                  <Link to='/metriks'>
+                    <button
+                      className="exgauster__btn"
+                      onClick={() => {
+                        handleMnemoshemeClick('Х-172')
                     }}
                   ></button>
+                  </Link>
+
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -662,6 +681,7 @@ export default function MainPage({handleMnemoshemeClick, data, boolCheck}) {
 {/* ///////////////////////////////////////////////////////////////////////// */}
         </ul>
       </section>
+      <a className="grafana" href="http://51.250.23.216:33001/" target="_blank">Анализ трендов метрик</a>
     </main>
   );
 }

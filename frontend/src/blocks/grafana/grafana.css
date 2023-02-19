@@ -1,0 +1,19 @@
+.grafana {
+  text-decoration: none;
+  color: #000;
+  margin: 10px calc((100% - 210px)/2) 30px;
+  padding: 10px;
+  justify-self: center;
+  align-self: center;
+  font-family: 'GT Eesti';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 20px;
+  background: #E1E1E1;
+  border-radius: 4px;
+  text-align: center;
+  position: relative;
+  bottom: 40px;
+}
+

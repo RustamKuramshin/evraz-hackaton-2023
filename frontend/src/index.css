@@ -54,3 +54,4 @@
 @import url("./blocks/bearing/__temperature-image/_status/bearing__temperature_warning.css");
 @import url("./blocks/bearing/__vibration-image/_status/bearing__vibration_warning.css");
 @import url("./blocks/bearing/__vibration-image/_status/bearing__vibration_alarm.css");
+@import url("./blocks/grafana/grafana.css");

@@ -22,8 +22,6 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class MetricsTimeSeriesServiceImpl implements MetricsTimeSeriesService {
 
-    private final MetricsTimeSeriesDao metricsTimeSeriesDao;
-
     private final MetricsConverter metricsConverter;
 
     private final CsvMappingLoader csvMappingLoader;
@@ -39,6 +37,11 @@ public class MetricsTimeSeriesServiceImpl implements MetricsTimeSeriesService {
     @Override
     public void saveToInfluxDb(String metricsJson) throws JsonProcessingException, ParseException {
         HashMap<String, Object> metricsMap = metricsConverter.convertMetricsToMap(metricsJson);
+
+        String moment = (String) metricsMap.get("moment");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
+        Date d = format.parse(moment);
+        long milliseconds = d.getTime();
 
         Map<String, SignalDto> signals = csvMappingLoader.getSignals();
 
@@ -56,7 +59,7 @@ public class MetricsTimeSeriesServiceImpl implements MetricsTimeSeriesService {
             if (oneSignal != null) {
 
                 Point.Builder pointBuilder = Point.measurement("metrics")
-                        .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+                        .time(milliseconds, TimeUnit.MILLISECONDS)
                         .addField(k, (Double) v);
 
                 if (oneSignal.getExhauster() != null) {

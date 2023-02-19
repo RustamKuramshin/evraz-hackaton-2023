@@ -16,9 +16,15 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     private final InfoHandler infoHandler;
 
+    private final MetricsHandler metricsHandler;
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(infoHandler, "/info")
+                .addInterceptors(new HttpSessionHandshakeInterceptor())
+                .setAllowedOrigins("*");
+
+        registry.addHandler(metricsHandler, "/metrics")
                 .addInterceptors(new HttpSessionHandshakeInterceptor())
                 .setAllowedOrigins("*");
     }

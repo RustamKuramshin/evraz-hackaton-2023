@@ -2,7 +2,6 @@
 // Spring bot стандартный и jdk 16
 import React, { useEffect, useRef, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Api from '../utils/Api';
 import Header from './Header';
 import MainPage from './MainPage';
 

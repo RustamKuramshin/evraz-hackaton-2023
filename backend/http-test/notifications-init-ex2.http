@@ -1,0 +1,147 @@
+
+### Создание эксгаустера
+POST http://localhost:8080/api/v1/exhausters
+Content-Type: application/json
+
+{
+    "name": "У-175"
+}
+> {%
+    client.global.set("ex_uuid", response.body.uuid)
+%}
+
+### Создание деталей =======================================================================
+### Создание детали №1
+POST http://localhost:8080/api/v1/details
+Content-Type: application/json
+
+{
+    "exhauster": "/{{ex_uuid}}",
+    "name": "Подшиник №2"
+}
+> {%
+    client.global.set("detail_1_uuid", response.body.uuid)
+%}
+
+### Создание детали №2
+POST http://localhost:8080/api/v1/details
+Content-Type: application/json
+
+{
+    "exhauster": "/{{ex_uuid}}",
+    "name": "Подшиник №5"
+}
+> {%
+    client.global.set("detail_2_uuid", response.body.uuid)
+%}
+
+### Создание детали №3
+POST http://localhost:8080/api/v1/details
+Content-Type: application/json
+
+{
+    "exhauster": "/{{ex_uuid}}",
+    "name": "Подшиник №9"
+}
+> {%
+    client.global.set("detail_3_uuid", response.body.uuid)
+%}
+### ========================================================================================
+
+### Создание уведомлений для детали №1 =====================================================
+### Создание уведомления №1
+POST http://localhost:8080/api/v1/notifications
+Content-Type: application/json
+
+{
+    "detail": "/{{detail_1_uuid}}",
+    "notificationType": "OVERHEATED"
+}
+> {% var destDate = new Date().getTime() + 2000; while(new Date().getTime() < destDate); %}
+
+### Создание уведомления №2
+POST http://localhost:8080/api/v1/notifications
+Content-Type: application/json
+
+{
+    "detail": "/{{detail_1_uuid}}",
+    "notificationType": "BROKEN"
+}
+> {% var destDate = new Date().getTime() + 2000; while(new Date().getTime() < destDate); %}
+
+### ========================================================================================
+
+### Создание уведомлений для детали №2 =====================================================
+### Создание уведомления №1
+POST http://localhost:8080/api/v1/notifications
+Content-Type: application/json
+
+{
+    "detail": "/{{detail_2_uuid}}",
+    "notificationType": "OIL_STARVATION"
+}
+> {% var destDate = new Date().getTime() + 2000; while(new Date().getTime() < destDate); %}
+### ========================================================================================
+
+### Создание уведомлений для детали №3 =====================================================
+### Создание уведомления №1
+POST http://localhost:8080/api/v1/notifications
+Content-Type: application/json
+
+{
+    "detail": "/{{detail_3_uuid}}",
+    "notificationType": "OVERHEATED"
+}
+> {% var destDate = new Date().getTime() + 2000; while(new Date().getTime() < destDate); %}
+
+### Создание уведомления №2
+POST http://localhost:8080/api/v1/notifications
+Content-Type: application/json
+
+{
+    "detail": "/{{detail_3_uuid}}",
+    "notificationType": "OVERHEATED"
+}
+> {% var destDate = new Date().getTime() + 2000; while(new Date().getTime() < destDate); %}
+
+
+### Создание уведомления №3
+POST http://localhost:8080/api/v1/notifications
+Content-Type: application/json
+
+{
+    "detail": "/{{detail_3_uuid}}",
+    "notificationType": "OVERHEATED"
+}
+> {% var destDate = new Date().getTime() + 2000; while(new Date().getTime() < destDate); %}
+
+### Создание уведомления №4
+POST http://localhost:8080/api/v1/notifications
+Content-Type: application/json
+
+{
+    "detail": "/{{detail_3_uuid}}",
+    "notificationType": "OVERHEATED"
+}
+> {% var destDate = new Date().getTime() + 2000; while(new Date().getTime() < destDate); %}
+
+### Создание уведомления №5
+POST http://localhost:8080/api/v1/notifications
+Content-Type: application/json
+
+{
+    "detail": "/{{detail_3_uuid}}",
+    "notificationType": "OVERHEATED"
+}
+> {% var destDate = new Date().getTime() + 2000; while(new Date().getTime() < destDate); %}
+
+### Создание уведомления №6
+POST http://localhost:8080/api/v1/notifications
+Content-Type: application/json
+
+{
+    "detail": "/{{detail_3_uuid}}",
+    "notificationType": "OVERHEATED"
+}
+> {% var destDate = new Date().getTime() + 2000; while(new Date().getTime() < destDate); %}
+### ========================================================================================

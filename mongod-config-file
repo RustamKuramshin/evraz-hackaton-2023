@@ -1,0 +1,6 @@
+security:
+  keyFile: /docker-entrypoint-initdb.d/mongokeyfile
+replication:
+  replSetName: mstream
+net:
+   bindIp: localhost, exhauster-monitoring-api

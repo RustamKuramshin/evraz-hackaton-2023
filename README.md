@@ -42,6 +42,6 @@ Content-Type: application-json
 [http://51.250.23.216/](http://51.250.23.216/)
 
 ### Grafana для анализа трендов метрик
-[http://51.250.23.216:33001/](http://51.250.23.216:33001/)
+[http://51.250.23.216:33001/](http://51.250.23.216:33001/d/miNruYJVk/exhausters?orgId=1)
 Логин: admin
 Пароль: admin

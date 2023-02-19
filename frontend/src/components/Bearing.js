@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Bearing({
   title,
+  data,
+  keys,
+  exhauster,
+  boolCheck,
+  oilModify,
+  exgOneT
 }) {
-// запись вычисления замеров на каждый подшипник и масляной бак
-// по эксгаустерам [min, max, state]
 
   const isVibrationThere = title === '№1  п-к' || title === '№2  п-к' || title === '№7  п-к' || title === '№8  п-к';
   const isThisLiquid = title === 'Уровень масла';
@@ -22,12 +26,11 @@ export default function Bearing({
       `bearing__vibration-image_disabled`}`
   );
 
-
   return(
     <div className="bearing">
       <p className="bearing__title">{title}</p>
       <div className="bearing__images">
-        <div className={iconClassNameBearing}></div>
+        <div className={`${iconClassNameBearing} ${oilModify} ${exgOneT}`}></div>
         <div className={iconClassNameVibration}></div>
       </div>
     </div>

@@ -1,13 +1,14 @@
 import React from "react";
 import headingLogo from '../images/doc_Icon.svg';
-import legend from '../images/legend.svg';
 import ellips_red from '../images/Ellipse_red.svg';
 import ellips_green from '../images/Ellipse_green.svg';
-import schema from '../images/Scheme.svg'
-
+import schema from '../images/Scheme.svg';
 import Bearing from "./Bearing";
+import { Route, Switch, Link } from "react-router-dom";
+const { dataForExg } = require('../utils/ExgaustersData');
 
-export default function MainPage({handleMnemoshemeClick, data}) {
+export default function MainPage({handleMnemoshemeClick, data, boolCheck, oilFirst, oilSecond,
+  oilThird, oilFourth, exgOneT_array}) {
   const selectEllipseStatus = (nameExgauster) => {
     if(data[nameExgauster] === 1)
       return ellips_green;
@@ -32,12 +33,14 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[2.0]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер У-171</p>
-                  <button
-                    className="exgauster__btn"
-                    onClick={() => {
-                      handleMnemoshemeClick('Эксгаустера У-171')
-                    }}
-                  ></button>
+                  <Link to='/metrics'>
+                    <button
+                      className="exgauster__btn"
+                      onClick={() => {
+                        handleMnemoshemeClick('У-171')
+                      }}
+                    ></button>
+                  </Link>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -60,16 +63,76 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                   </div>
                   <Bearing
                     title={'№1  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-171'}
+                    boolCheck={boolCheck}
+
                   />
-                  <Bearing title={'№2  п-к'}/>
-                  <Bearing title={'№3  п-к'}/>
-                  <Bearing title={'№4  п-к'}/>
-                  <Bearing title={'№5  п-к'}/>
-                  <Bearing title={'№6  п-к'}/>
-                  <Bearing title={'№7  п-к'}/>
-                  <Bearing title={'№8  п-к'}/>
-                  <Bearing title={'№9  п-к'}/>
-                  <Bearing title={'Уровень масла'}/>
+                  <Bearing
+                    title={'№2  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№3  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№4  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№5  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№6  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№7  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№8  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№9  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'Уровень масла'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-171'}
+                    boolCheck={boolCheck}
+                    oilModify={oilFirst}
+                  />
                 </div>
               </div>
 
@@ -77,12 +140,14 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[2.1]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер У-172</p>
+                  <Link to='/metrics'>
                   <button
                     className="exgauster__btn"
                     onClick={() => {
-                      handleMnemoshemeClick('Эксгаустера У-172')
+                      handleMnemoshemeClick('У-172')
                     }}
                   ></button>
+                  </Link>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -103,16 +168,77 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                     <button className="bearing__btn"></button>
                     <p className="bearing__heading">Все подшипники</p>
                   </div>
-                  <Bearing title={'№1  п-к'}/>
-                  <Bearing title={'№2  п-к'}/>
-                  <Bearing title={'№3  п-к'}/>
-                  <Bearing title={'№4  п-к'}/>
-                  <Bearing title={'№5  п-к'}/>
-                  <Bearing title={'№6  п-к'}/>
-                  <Bearing title={'№7  п-к'}/>
-                  <Bearing title={'№8  п-к'}/>
-                  <Bearing title={'№9  п-к'}/>
-                  <Bearing title={'Уровень масла'}/>
+                  <Bearing
+                    title={'№1  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№2  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№3  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№4  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№5  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№6  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№7  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№8  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№9  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'Уровень масла'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер У-172'}
+                    boolCheck={boolCheck}
+                    oilModify={oilSecond}
+                  />
                 </div>
               </div>
             </div>
@@ -127,12 +253,14 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[0.0]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер Ф-171</p>
-                  <button
-                    className="exgauster__btn"
-                    onClick={() => {
-                      handleMnemoshemeClick('Эксгаустера Ф-171')
-                    }}
-                  ></button>
+                  <Link to='/metrics'>
+                    <button
+                      className="exgauster__btn"
+                      onClick={() => {
+                        handleMnemoshemeClick('Ф-171')
+                      }}
+                    ></button>
+                  </Link>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -153,16 +281,77 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                     <button className="bearing__btn"></button>
                     <p className="bearing__heading">Все подшипники</p>
                   </div>
-                  <Bearing title={'№1  п-к'}/>
-                  <Bearing title={'№2  п-к'}/>
-                  <Bearing title={'№3  п-к'}/>
-                  <Bearing title={'№4  п-к'}/>
-                  <Bearing title={'№5  п-к'}/>
-                  <Bearing title={'№6  п-к'}/>
-                  <Bearing title={'№7  п-к'}/>
-                  <Bearing title={'№8  п-к'}/>
-                  <Bearing title={'№9  п-к'}/>
-                  <Bearing title={'Уровень масла'}/>
+                  <Bearing
+                    title={'№1  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№2  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№3  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№4  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№5  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№6  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№7  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№8  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№9  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'Уровень масла'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-171'}
+                    boolCheck={boolCheck}
+                    oilModify={oilThird}
+                  />
                 </div>
               </div>
 
@@ -170,12 +359,14 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[0.1]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер Ф-172</p>
+                  <Link to='/metrics'>
                   <button
                     className="exgauster__btn"
                     onClick={() => {
-                      handleMnemoshemeClick('Эксгаустера Ф-172')
+                      handleMnemoshemeClick('Ф-172')
                     }}
                   ></button>
+                  </Link>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -196,16 +387,77 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                     <button className="bearing__btn"></button>
                     <p className="bearing__heading">Все подшипники</p>
                   </div>
-                  <Bearing title={'№1  п-к'}/>
-                  <Bearing title={'№2  п-к'}/>
-                  <Bearing title={'№3  п-к'}/>
-                  <Bearing title={'№4  п-к'}/>
-                  <Bearing title={'№5  п-к'}/>
-                  <Bearing title={'№6  п-к'}/>
-                  <Bearing title={'№7  п-к'}/>
-                  <Bearing title={'№8  п-к'}/>
-                  <Bearing title={'№9  п-к'}/>
-                  <Bearing title={'Уровень масла'}/>
+                  <Bearing
+                    title={'№1  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№2  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№3  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№4  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№5  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№6  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№7  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№8  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№9  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'Уровень масла'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Ф-172'}
+                    boolCheck={boolCheck}
+                    oilModify={oilFourth}
+                  />
                 </div>
               </div>
             </div>
@@ -218,12 +470,14 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[3.0]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер Х-171</p>
-                  <button
-                    className="exgauster__btn"
-                    onClick={() => {
-                      handleMnemoshemeClick('Эксгаустера Х-171')
-                    }}
-                  ></button>
+                  <Link to='/metrics'>
+                    <button
+                      className="exgauster__btn"
+                      onClick={() => {
+                        handleMnemoshemeClick('Х-171')
+                      }}
+                    ></button>
+                  </Link>
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -244,16 +498,76 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                     <button className="bearing__btn"></button>
                     <p className="bearing__heading">Все подшипники</p>
                   </div>
-                  <Bearing title={'№1  п-к'}/>
-                  <Bearing title={'№2  п-к'}/>
-                  <Bearing title={'№3  п-к'}/>
-                  <Bearing title={'№4  п-к'}/>
-                  <Bearing title={'№5  п-к'}/>
-                  <Bearing title={'№6  п-к'}/>
-                  <Bearing title={'№7  п-к'}/>
-                  <Bearing title={'№8  п-к'}/>
-                  <Bearing title={'№9  п-к'}/>
-                  <Bearing title={'Уровень масла'}/>
+                  <Bearing
+                    title={'№1  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№2  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№3  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№4  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№5  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№6  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№7  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№8  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№9  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-171'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'Уровень масла'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-171'}
+                    boolCheck={boolCheck}
+                  />
                 </div>
               </div>
 
@@ -261,12 +575,15 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                 <div className="exgauster__heading">
                   <img className="exgauster__status-image" src={selectEllipseStatus("SM_Exgauster\\[3.1]")} alt="Эллипс статуса работы эксгаустера"/>
                   <p className="exgauster__name">Эксгаустер Х-172</p>
-                  <button
-                    className="exgauster__btn"
-                    onClick={() => {
-                      handleMnemoshemeClick('Эксгаустера Х-172')
+                  <Link to='/metriks'>
+                    <button
+                      className="exgauster__btn"
+                      onClick={() => {
+                        handleMnemoshemeClick('Х-172')
                     }}
                   ></button>
+                  </Link>
+
                 </div>
                 <div className="rotor">
                   <div className="rotor__heading">
@@ -287,16 +604,76 @@ export default function MainPage({handleMnemoshemeClick, data}) {
                     <button className="bearing__btn"></button>
                     <p className="bearing__heading">Все подшипники</p>
                   </div>
-                  <Bearing title={'№1  п-к'}/>
-                  <Bearing title={'№2  п-к'}/>
-                  <Bearing title={'№3  п-к'}/>
-                  <Bearing title={'№4  п-к'}/>
-                  <Bearing title={'№5  п-к'}/>
-                  <Bearing title={'№6  п-к'}/>
-                  <Bearing title={'№7  п-к'}/>
-                  <Bearing title={'№8  п-к'}/>
-                  <Bearing title={'№9  п-к'}/>
-                  <Bearing title={'Уровень масла'}/>
+                  <Bearing
+                    title={'№1  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№2  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№3  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№4  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№5  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№6  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№7  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№8  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'№9  п-к'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-172'}
+                    boolCheck={boolCheck}
+                  />
+                  <Bearing
+                    title={'Уровень масла'}
+                    data={data}
+                    keys={dataForExg}
+                    exhauster={'Эксгаустер Х-172'}
+                    boolCheck={boolCheck}
+                  />
                 </div>
               </div>
             </div>
@@ -304,6 +681,7 @@ export default function MainPage({handleMnemoshemeClick, data}) {
 {/* ///////////////////////////////////////////////////////////////////////// */}
         </ul>
       </section>
+      <a className="grafana" href="http://51.250.23.216:33001/" target="_blank">Анализ трендов метрик</a>
     </main>
   );
 }

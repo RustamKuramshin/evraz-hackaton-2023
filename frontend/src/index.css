@@ -48,3 +48,9 @@
 @import url("./blocks/bearing/__temperature-image/bearing__temperature-image.css");
 @import url("./blocks/bearing/__vibration-image/bearing__vibration-image.css");
 @import url("./blocks/bearing/__vibration-image/_activity/bearing__vibration-image_disabled.css");
+@import url("./blocks/bearing/__liquid-image/_status/bearing__liquid_alarm.css");
+@import url("./blocks/bearing/__liquid-image/_status/bearing__liquid_warning.css");
+@import url("./blocks/bearing/__temperature-image/_status/bearing__temperature_alarm.css");
+@import url("./blocks/bearing/__temperature-image/_status/bearing__temperature_warning.css");
+@import url("./blocks/bearing/__vibration-image/_status/bearing__vibration_warning.css");
+@import url("./blocks/bearing/__vibration-image/_status/bearing__vibration_alarm.css");

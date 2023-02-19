@@ -8,8 +8,8 @@ import MainPage from './MainPage';
 
 function App() {
   const [data, setData] = useState({});
+  const [boolCheck, setBoolCheck] = useState(false);
   const [paginationName, setPaginationName] = useState('Прогнозная аналитика эксгаустеров');
-  //const socket = useRef(new WebSocket('ws://localhost:8080/'));
   const socket = useRef(new WebSocket('ws://51.250.23.216:38080/metrics'));
 
   //console.log([input, data]);
@@ -25,13 +25,14 @@ function App() {
       //Api.getInfo();
     };
 
+
+
     socket.current.onmessage = (event) => {
       let temp = JSON.parse(event.data);
       setData(temp);
-      console.log(data["SM_Exgauster\\[8:1]"]);
-
-      // setInput(temp["SM_Exgauster\\[8:1]"]);
-      // console.log(input);
+      if(!boolCheck)
+        setBoolCheck(true);
+      console.log(JSON.stringify(data));
     }
 
     return () => socket.current.onclose = () => {
@@ -48,6 +49,7 @@ function App() {
           <MainPage
             data={data}
             handleMnemoshemeClick={handleGoToMnenoshemePageClick}
+            boolCheck={boolCheck}
           />
           {/* {data["SM_Exgauster\\[8:1]"]} */}
         </Route>
